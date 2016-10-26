@@ -1,7 +1,7 @@
 package com.bus.tian.tianbus.di.component;
 
 import com.bus.tian.tianbus.di.module.RegisterPresenterModule;
-import com.bus.tian.tianbus.view.login.RegisterPreActivity;
+import com.bus.tian.tianbus.view.login.RegisterActivity;
 
 import dagger.Component;
 
@@ -10,5 +10,5 @@ import dagger.Component;
  */
 @Component(dependencies = INetCompoent.class, modules = RegisterPresenterModule.class)
 public interface IRegisterPresenterComponent {
-    void inject(RegisterPreActivity registerPreActivity);
+    void inject(RegisterActivity registerPreActivity);
 }

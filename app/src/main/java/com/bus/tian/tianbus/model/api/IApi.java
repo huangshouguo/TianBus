@@ -16,9 +16,10 @@ import rx.Observable;
 
 public interface IApi {
 
-    @GET("checkphone")
+    @FormUrlEncoded
+    @POST("checkphone")
     Observable<ApiResponseBean<UserBean>> findUserByPhoneNumber(
-            @Query("phone") String phoneNumber);
+            @Field("phone") String phoneNumber);
 
     @GET("getcaptcha")
     Observable<ApiResponseBean<UserBean>> sendSmsCaptcha(

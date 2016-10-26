@@ -9,6 +9,10 @@
     <color name="colorBtnTextNormal">#FFFFFFFF</color>
     <color name="colorBtnTextPressed">#FFFFFFFF</color>
     <color name="colorBtnTextDisable">#FFFFFFFF</color>
+    <color name="colorBtnWhiteTxtNormal">#FF0070BB</color>
+    <color name="colorBtnWhiteTxtPressed">#FF303F9F</color>
+    <color name="colorBtnWhiteTxtDisable">#FFCCCCCC</color>
+    <color name="colorContentTitle">#FF313131</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundDark">#FFF8F8F8</color>

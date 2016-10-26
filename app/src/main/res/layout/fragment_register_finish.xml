@@ -10,8 +10,7 @@
         android:id="@+id/text_register_finish_remainder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_left_gap"
-        android:text="skjfjsd" />
+        android:layout_margin="@dimen/default_left_gap"/>
 
     <!--separator-->
     <include layout="@layout/separator_line" />

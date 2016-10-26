@@ -5,10 +5,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.bus.tian.tianbus.R;
+import com.bus.tian.tianbus.view.login.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +55,13 @@ public class MainActivity extends BaseActivity {
     private void initDrawerNav() {
         this.drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         setupDrawerContent(this.navigationView);
+        this.navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onClick: onclick header");
+                startLogin();
+            }
+        });
     }
 
     @Override
@@ -83,5 +93,9 @@ public class MainActivity extends BaseActivity {
                 return true;
             });
         }
+    }
+
+    private void startLogin(){
+        LoginActivity.actionStart(context);
     }
 }

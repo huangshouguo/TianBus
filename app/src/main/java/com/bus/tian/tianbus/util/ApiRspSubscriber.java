@@ -1,6 +1,7 @@
 package com.bus.tian.tianbus.util;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.bus.tian.tianbus.contract.IBaseContract;
 
@@ -12,6 +13,7 @@ import rx.Subscriber;
  */
 
 public class ApiRspSubscriber<T> extends Subscriber<T> {
+    private static final String TAG = "ApiRspSubscriber";
 
     private IBaseContract.IBaseView baseView;
     private boolean shouldHideProgressDialog;
@@ -44,6 +46,7 @@ public class ApiRspSubscriber<T> extends Subscriber<T> {
     public void onError(Throwable e) {
         if (this.progressObserver != null) {
             this.progressObserver.onError(e);
+            Log.e(TAG, "onError:" , e );
         }
     }
 

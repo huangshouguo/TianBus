@@ -13,15 +13,22 @@
     <dimen name="nav_header_text_font_size">14sp</dimen>
     <dimen name="input_text_font_size">18sp</dimen>
     <dimen name="button_text_font_size">20sp</dimen>
+    <dimen name="button_white_text_font_size">14sp</dimen>
 
     <dimen name="ft30">30sp</dimen>
     <dimen name="ft28">28sp</dimen>
     <dimen name="ft26">26sp</dimen>
     <dimen name="ft24">24sp</dimen>
-    <dimen name="ft30">30sp</dimen>
-    <dimen name="ft30">30sp</dimen>
-    <dimen name="ft30">30sp</dimen>
-    <dimen name="ft30">30sp</dimen>
-    <dimen name="ft30">30sp</dimen>
-    <dimen name="ft30">30sp</dimen>
+    <dimen name="ft22">22sp</dimen>
+    <dimen name="ft20">20sp</dimen>
+    <dimen name="ft18">18sp</dimen>
+    <dimen name="ft16">16sp</dimen>
+    <dimen name="ft14">14sp</dimen>
+    <dimen name="ft12">12sp</dimen>
+    <dimen name="ft10">10sp</dimen>
+    <dimen name="ft8">8sp</dimen>
+    <dimen name="ft6">6sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

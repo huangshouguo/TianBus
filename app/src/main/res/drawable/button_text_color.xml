@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_enabled="false" android:drawable="@color/colorBtnTextDisable"/>
-    <item android:state_pressed="true" android:drawable="@color/colorBtnTextPressed"/>
-    <item android:drawable="@color/colorBtnTextNormal"/>
+    <item android:state_enabled="false" android:color="@color/colorBtnTextDisable"/>
+    <item android:state_pressed="true" android:color="@color/colorBtnTextPressed"/>
+    <item android:color="@color/colorBtnTextNormal"/>
 </selector>

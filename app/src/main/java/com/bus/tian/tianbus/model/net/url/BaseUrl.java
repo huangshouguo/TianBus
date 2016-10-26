@@ -7,6 +7,6 @@ package com.bus.tian.tianbus.model.net.url;
 public class BaseUrl implements IBaseUrl {
     @Override
     public String getRestBaseUrl() {
-        return null;
+        return "http://www.4274444.com:12344/api/";
     }
 }
