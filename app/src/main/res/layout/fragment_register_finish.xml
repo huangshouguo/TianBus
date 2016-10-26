@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundDark"
+    android:orientation="vertical">
+
+    <!--remainder-->
+    <TextView
+        android:id="@+id/text_register_finish_remainder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_left_gap"
+        android:text="skjfjsd" />
+
+    <!--separator-->
+    <include layout="@layout/separator_line" />
+
+    <!--sms captcha & timmer-->
+    <include layout="@layout/input_sms_captcha" />
+
+    <!--separator-->
+    <include layout="@layout/separator_line_middle" />
+
+    <!--pwd-->
+    <include layout="@layout/input_password" />
+
+    <!--separator-->
+    <include layout="@layout/separator_line_middle" />
+
+    <!--pwd confirm-->
+    <include layout="@layout/input_password_confirm" />
+
+    <!--separator-->
+    <include layout="@layout/separator_line" />
+
+    <!--submit-->
+    <Button
+        android:id="@+id/btn_finish_register"
+        style="@style/ButtonTheme.Radius"
+        android:layout_marginTop="50dp"
+        android:text="@string/text_finish_register" />
+</LinearLayout>

@@ -2,10 +2,10 @@
 
     <!-- Base application theme. -->
     <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
-        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--<item name="colorAccent">@color/colorAccent</item>-->
     <!--</style>-->
 
     <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -15,10 +15,45 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme" parent="Base.AppTheme"/>
+    <style name="AppTheme" parent="Base.AppTheme" />
 
-    <style name="AppTheme.OverlabSystemBar" parent="Base.AppTheme"/>
+    <style name="AppTheme.OverlabSystemBar" parent="Base.AppTheme" />
 
-    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="ButtonTheme.Radius" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/default_left_gap</item>
+        <item name="android:layout_marginRight">@dimen/default_right_gap</item>
+        <item name="android:background">@drawable/button_background_radius</item>
+        <item name="android:textSize">@dimen/button_text_font_size</item>
+        <item name="android:textColor">@color/colorBtnTextNormal</item>
+    </style>
+
+    <style name="BaseEditTextStyle" parent="AppTheme">
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">@dimen/default_left_gap</item>
+        <item name="android:paddingRight">@dimen/default_right_gap</item>
+        <item name="android:textColor">@color/colorInputText</item>
+        <item name="android:textColorHint">@color/colorInputHintText</item>
+        <item name="android:textSize">@dimen/input_text_font_size</item>
+    </style>
+
+    <style name="EditTextIconStyle" parent="EditTextIconStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingLeft">@dimen/default_left_gap</item>
+        <item name="android:paddingRight">@dimen/default_right_gap</item>
+        <item name="android:textColor">@color/colorInputText</item>
+        <item name="android:textColorHint">@color/colorInputHintText</item>
+        <item name="android:textSize">@dimen/input_text_font_size</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:drawablePadding">@dimen/icon_content_padding</item>
+    </style>
 </resources>

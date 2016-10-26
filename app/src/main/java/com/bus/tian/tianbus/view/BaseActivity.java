@@ -16,6 +16,7 @@ import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import javax.annotation.Nonnull;
 
 import rx.Observable;
+import rx.Observer;
 import rx.subjects.BehaviorSubject;
 
 /**
@@ -72,6 +73,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
         super.onDestroy();
     }
 
+    @Override
+    public void showErrorMessage(String errorMsg) {
+        // TODO: 10/26/16 show error
+    }
+
+    @Override
+    public Observer<String> showProgress(boolean shouldHideProgressDialog) {
+        //// TODO: 10/26/16 show progress
+        return null;
+    }
+
     @Nonnull
     @Override
     public Observable<ActivityEvent> lifecycle() {
@@ -93,6 +105,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
     protected <T> LifecycleTransformer<T> bindToDestroyEvent() {
         //not unsubscribe until view destroyed,  instead of bindToliefeCycle that some bugs, such as subscribed in onResume and unsubscribed in onPause when show loading
         return bindUntilEvent(ActivityEvent.DESTROY);
+    }
+
+    @Override
+    public <T> LifecycleTransformer<T> doBindToLifecycle() {
+        return bindToDestroyEvent();
     }
 
     protected abstract int getContentViewResId();

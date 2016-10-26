@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundDark"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <!--phone-->
+    <include layout="@layout/input_phone" />
+
+    <!--submit-->
+    <Button
+        android:id="@+id/btn_next_register"
+        style="@style/ButtonTheme.Radius"
+        android:layout_marginTop="50dp"
+        android:text="@string/text_quickly_register" />
+</LinearLayout>

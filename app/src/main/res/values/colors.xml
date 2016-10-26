@@ -3,5 +3,20 @@
     <color name="colorPrimary">#0070BB</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorBtnBgNormal">#FF0070BB</color>
+    <color name="colorBtnBgPressed">#FF303F9F</color>
+    <color name="colorBtnBgDisable">#FFCCCCCC</color>
+    <color name="colorBtnTextNormal">#FFFFFFFF</color>
+    <color name="colorBtnTextPressed">#FFFFFFFF</color>
+    <color name="colorBtnTextDisable">#FFFFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBackground">#FFFFFFFF</color>
+    <color name="colorBackgroundDark">#FFF8F8F8</color>
+    <color name="colorIcon">#FFCCCCCC</color>
+    <color name="colorInputText">#FF313131</color>
+    <color name="colorInputHintText">#FFCCCCCC</color>
+    <color name="colorSeparatorLine">#FFDCDCDC</color>
+    <color name="colorBtnWarnningNormal">#FFFF0000</color>
+    <color name="colorBtnWarnningDisable">#51ea421b</color>
+    <color name="colorBtnWarnningPressed">#FFea421b</color>
 </resources>
