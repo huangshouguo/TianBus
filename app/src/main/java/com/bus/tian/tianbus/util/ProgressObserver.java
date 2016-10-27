@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.bus.tian.tianbus.view.BaseActivity;
-import com.bus.tian.tianbus.view.MainActivity;
 
 import rx.Observer;
 
@@ -79,9 +78,7 @@ public class ProgressObserver {
             this.progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    if (!(activity instanceof MainActivity)) {
-                        activity.finish();
-                    }
+                    hideProgress();
                 }
             });
         }

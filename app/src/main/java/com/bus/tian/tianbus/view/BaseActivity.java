@@ -5,6 +5,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.bus.tian.tianbus.contract.IBaseContract;
 import com.bus.tian.tianbus.util.ProgressObserver;
@@ -85,7 +87,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
 
     @Override
     public void showErrorMessage(String errorMsg) {
-        // TODO: 10/26/16 show error
+        Log.e(TAG, "showErrorMessage: errorMsg = " + errorMsg);
+
+        // TODO: 10/27/16 wrapper show message func
+        Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
     }
 
     @Override
