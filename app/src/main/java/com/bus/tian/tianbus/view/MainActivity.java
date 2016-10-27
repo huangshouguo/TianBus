@@ -44,6 +44,11 @@ public class MainActivity extends BaseActivity {
         initDrawerNav();
     }
 
+    @Override
+    protected void onRelease() {
+
+    }
+
     private void initToolBar() {
         setSupportActionBar(this.toolBar);
         ActionBar actionBar = getSupportActionBar();

@@ -49,6 +49,11 @@ public class RegisterActivity extends BaseActivity implements IRegisterContract.
     }
 
     @Override
+    protected void onRelease() {
+
+    }
+
+    @Override
     public void updateView(UserBean userBean) {
 
     }

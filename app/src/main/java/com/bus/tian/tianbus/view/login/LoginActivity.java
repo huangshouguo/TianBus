@@ -56,6 +56,13 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
         ButterKnife.bind(this);
     }
 
+    @Override
+    protected void onRelease() {
+        if (this.loginPresenter != null){
+//            this.loginPresenter.onRelease();
+        }
+    }
+
     @OnClick({R.id.btn_login, R.id.btn_login_register, R.id.btn_login_forgot})
     public void onClick(View view) {
         switch (view.getId()) {

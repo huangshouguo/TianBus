@@ -70,6 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
     @Override
     protected void onDestroy() {
         this.lifecycleSubject.onNext(ActivityEvent.DESTROY);
+        this.onRelease();
         super.onDestroy();
     }
 
@@ -117,4 +118,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
     protected abstract void initData();
 
     protected abstract void initView();
+
+    protected abstract void onRelease();
 }

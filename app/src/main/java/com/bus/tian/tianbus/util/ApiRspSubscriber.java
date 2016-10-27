@@ -5,6 +5,11 @@ import android.util.Log;
 
 import com.bus.tian.tianbus.contract.IBaseContract;
 
+import java.net.ConnectException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observer;
 import rx.Subscriber;
 
@@ -44,16 +49,35 @@ public class ApiRspSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
+        Log.e(TAG, "onError:", e);
+
         if (this.progressObserver != null) {
-            this.progressObserver.onError(e);
-            Log.e(TAG, "onError:" , e );
+            this.progressObserver.onError(new Throwable(getErrorMessage(e)));
         }
+
+        Log.e(TAG, "onError: errorMsg = " + getErrorMessage(e));
     }
 
     @Override
     public void onNext(T t) {
-        if (this.progressObserver != null){
+        if (this.progressObserver != null) {
             this.progressObserver.onNext("数据加载成功!");
         }
+    }
+
+    private String getErrorMessage(Throwable e) {
+        String errorMsg = e.getMessage();
+
+        if (e instanceof HttpException) {
+            errorMsg = ErrorMsgUtil.ERR_MSG_SERVER_ERROR;
+        } else if (e instanceof UnknownHostException) {
+            errorMsg = ErrorMsgUtil.ERR_MSG_UNKNOWN_HOST;
+        } else if (e instanceof ConnectException) {
+            errorMsg = ErrorMsgUtil.ERR_MSG_CONNECT_ERROR;
+        } else if (e instanceof SocketException) {
+            errorMsg = ErrorMsgUtil.ERR_MSG_SOCKET_TIMEOUT;
+        }
+
+        return errorMsg;
     }
 }

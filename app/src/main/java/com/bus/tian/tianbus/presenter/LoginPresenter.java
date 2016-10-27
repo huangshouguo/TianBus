@@ -55,11 +55,10 @@ public class LoginPresenter extends BasePresenter implements ILoginContract.IPre
                 })
                 .compose(preHandleApiResponse())
                 .compose(doSchedulersAndBindLifecycle())
-                .subscribe(new ApiRspSubscriber<UserBean>(this.view) {
+                .subscribe(new ApiRspSubscriber<UserBean>(this.view){
                     @Override
                     public void onNext(UserBean userBean) {
                         super.onNext(userBean);
-                        view.updateLoginView(userBean);
                     }
                 });
     }
