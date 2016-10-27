@@ -11,6 +11,7 @@ public class ErrorMsgUtil {
     public static final String ERR_MSG_USER_REGISTED = "用户已注册";
     public static final String ERR_MSG_PWD_EMPTY = "密码不能为空";
     public static final String ERR_MSG_PWD_INVALID = "密码不合法";
+    public static final String ERR_MSG_SMS_CAPTCHA_EMPTY = "短信验证码不能为空";
     public static final String ERR_MSG_SERVER_ERROR = "服务器故障，请稍后重试。";
     public static final String ERR_MSG_UNKNOWN_HOST = "网络错误：无法解析服务器地址，请稍后重试。";
     public static final String ERR_MSG_CONNECT_ERROR = "网络错误：无法连接到服务器，请稍后重试。";

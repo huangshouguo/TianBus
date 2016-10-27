@@ -1,6 +1,5 @@
 package com.bus.tian.tianbus.di.component;
 
-import com.bus.tian.tianbus.di.module.RegisterPresenterModule;
 import com.bus.tian.tianbus.view.login.RegisterActivity;
 
 import dagger.Component;

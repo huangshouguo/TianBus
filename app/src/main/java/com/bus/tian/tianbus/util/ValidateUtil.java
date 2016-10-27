@@ -12,23 +12,31 @@ import com.bus.tian.tianbus.contract.IBaseContract;
 public class ValidateUtil {
     private static final String TAG = "ValidateUtil";
 
-    public static boolean validatePhoneNumber(final IBaseContract.IBaseView view, String phoneNumber) {
+    public static boolean validatePhoneNumber(final IBaseContract.IBaseView view, final String phoneNumber, final boolean showMsg) {
         if (view == null) {
             Log.e(TAG, "validatePhoneNumber: input params error, view = " + view);
             return false;
         }
 
         if (TextUtils.isEmpty(phoneNumber)) {
-            view.showErrorMessage(ErrorMsgUtil.ERR_MSG_PHONE_EMPTY);
+            if (showMsg) {
+                view.showErrorMessage(ErrorMsgUtil.ERR_MSG_PHONE_EMPTY);
+            }
             return false;
         }
 
-        if (!TextUtils.isDigitsOnly(phoneNumber) || phoneNumber.length() != 11) {
-            view.showErrorMessage(ErrorMsgUtil.ERR_MSG_PHONE_INVALID);
+        if (!TextUtils.isDigitsOnly(phoneNumber) || (phoneNumber.length() != 11)) {
+            if (showMsg) {
+                view.showErrorMessage(ErrorMsgUtil.ERR_MSG_PHONE_INVALID);
+            }
             return false;
         }
 
         return true;
+    }
+
+    public static boolean validatePhoneNumber(final IBaseContract.IBaseView view, String phoneNumber) {
+        return validatePhoneNumber(view, phoneNumber, true);
     }
 
     public static boolean validatePassword(IBaseContract.IBaseView view, final String password) {
@@ -42,8 +50,22 @@ public class ValidateUtil {
             return false;
         }
 
-        if (password.length() < 6 || password.length() > 10) {
+        if ((password.length() < 6) || (password.length() > 10)) {
             view.showErrorMessage(ErrorMsgUtil.ERR_MSG_PWD_INVALID);
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean validateSmsCaptchaValue(final IBaseContract.IBaseView view, final String captchaValue) {
+        if (view == null) {
+            Log.e(TAG, "validatePhoneNumber: input params error, view = " + view);
+            return false;
+        }
+
+        if (TextUtils.isEmpty(captchaValue)) {
+            view.showErrorMessage(ErrorMsgUtil.ERR_MSG_SMS_CAPTCHA_EMPTY);
             return false;
         }
 

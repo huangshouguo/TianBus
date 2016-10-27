@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
     @Override
     protected void onRelease() {
         if (this.loginPresenter != null){
-//            this.loginPresenter.onRelease();
+            this.loginPresenter.onRelease();
         }
     }
 

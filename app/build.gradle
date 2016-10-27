@@ -91,4 +91,5 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
     testCompile "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
+    compile 'com.android.support:support-v4:24.2.1'
 }

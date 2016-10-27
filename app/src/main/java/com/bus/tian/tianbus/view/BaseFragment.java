@@ -3,7 +3,10 @@ package com.bus.tian.tianbus.view;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.bus.tian.tianbus.contract.IBaseContract;
 import com.trello.rxlifecycle.LifecycleProvider;
@@ -26,6 +29,7 @@ public abstract class BaseFragment extends Fragment implements IBaseContract.IBa
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
     protected BaseActivity baseActivity;
+    protected View rootView;
 
     @Override
     public void onAttach(Context context) {
@@ -38,6 +42,13 @@ public abstract class BaseFragment extends Fragment implements IBaseContract.IBa
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.lifecycleSubject.onNext(FragmentEvent.CREATE);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.rootView = inflater.inflate(getContentViewResId(), container, false);
+        return this.rootView;
     }
 
     @Override
@@ -120,6 +131,11 @@ public abstract class BaseFragment extends Fragment implements IBaseContract.IBa
     @Override
     public <T> LifecycleTransformer<T> bindToLifecycle() {
         return RxLifecycleAndroid.bindFragment(this.lifecycleSubject);
+    }
+
+    @Override
+    public <T> LifecycleTransformer<T> doBindToLifecycle() {
+        return bindToDestroyEvent();
     }
 
     public <T> LifecycleTransformer<T> bindToDestroyEvent() {

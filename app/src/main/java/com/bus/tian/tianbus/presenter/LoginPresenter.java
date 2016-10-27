@@ -13,6 +13,7 @@ import com.bus.tian.tianbus.util.ValidateUtil;
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.Subscription;
 import rx.functions.Func1;
 
 /**
@@ -42,11 +43,11 @@ public class LoginPresenter extends BasePresenter implements ILoginContract.IPre
             return;
         }
 
-        getApi().findUserByPhoneNumber(phoneNumber)
+        Subscription subscription = getApi().findUserByPhoneNumber(phoneNumber)
                 .flatMap(new Func1<ApiResponseBean<UserBean>, Observable<ApiResponseBean<UserBean>>>() {
                     @Override
                     public Observable<ApiResponseBean<UserBean>> call(ApiResponseBean<UserBean> userBeanApiResponseBean) {
-                        if (userBeanApiResponseBean.getCode() != ApiResponseCode.API_RSP_CODE_SUCCEED){
+                        if (userBeanApiResponseBean.getCode() != ApiResponseCode.API_RSP_CODE_SUCCEED) {
                             return getApi().login(phoneNumber, password);
                         } else {
                             return Observable.error(new Throwable(ErrorMsgUtil.ERR_MSG_USER_NOT_FOUND));
@@ -55,11 +56,13 @@ public class LoginPresenter extends BasePresenter implements ILoginContract.IPre
                 })
                 .compose(preHandleApiResponse())
                 .compose(doSchedulersAndBindLifecycle())
-                .subscribe(new ApiRspSubscriber<UserBean>(this.view){
+                .subscribe(new ApiRspSubscriber<UserBean>(this.view) {
                     @Override
                     public void onNext(UserBean userBean) {
                         super.onNext(userBean);
                     }
                 });
+
+        addSubscription(subscription);
     }
 }
