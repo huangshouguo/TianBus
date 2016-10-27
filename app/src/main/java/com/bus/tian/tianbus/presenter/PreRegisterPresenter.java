@@ -4,6 +4,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.bus.tian.tianbus.contract.IPreRegisterContract;
+import com.bus.tian.tianbus.model.api.ApiResponseCode;
+import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.ApiRspSubscriber;
 import com.bus.tian.tianbus.util.ErrorMsgUtil;
@@ -40,13 +42,15 @@ public class PreRegisterPresenter extends BasePresenter implements IPreRegisterC
         }
 
         Subscription subscription = getApi().findUserByPhoneNumber(phoneNumber)
-                .compose(preHandleApiResponse())
                 .compose(doSchedulersAndBindLifecycle())
-                .subscribe(new ApiRspSubscriber<UserBean>(this.view) {
+                .subscribe(new ApiRspSubscriber<ApiResponseBean<UserBean>>(this.view){
                     @Override
-                    public void onNext(UserBean userBean) {
-                        super.onNext(userBean);
-
+                    public void onNext(ApiResponseBean<UserBean> userBeanApiResponseBean) {
+                        if (userBeanApiResponseBean.getCode() == ApiResponseCode.API_RSP_CODE_SUCCEED){
+                            view.updateView(userBeanApiResponseBean.getData());
+                        } else {
+                            view.showErrorMessage(ErrorMsgUtil.ERR_MSG_USER_REGISTED);
+                        }
                     }
                 });
 

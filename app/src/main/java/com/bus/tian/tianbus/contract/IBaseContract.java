@@ -19,5 +19,6 @@ public interface IBaseContract {
     }
 
     interface IBasePresenter {
+        void onRelease();
     }
 }

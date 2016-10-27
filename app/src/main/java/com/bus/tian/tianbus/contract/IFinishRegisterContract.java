@@ -17,6 +17,8 @@ public interface IFinishRegisterContract {
     interface IPresenter extends IBaseContract.IBasePresenter {
         void loadSmsCaptcha(final String phoneNumber);
 
+        boolean confirmPassword(final String inputPwd, final String confirmPwd);
+
         void doRegister(final String phoneNumber, final String pwd, final String captchaValue, final String captchaId);
     }
 }

@@ -36,6 +36,7 @@ public class BasePresenter implements IBaseContract.IBasePresenter {
         DaggerINetCompoent.builder().build().inject(this);
     }
 
+    @Override
     public void onRelease() {
         if (this.compositeSubscription != null) {
             this.compositeSubscription.unsubscribe();

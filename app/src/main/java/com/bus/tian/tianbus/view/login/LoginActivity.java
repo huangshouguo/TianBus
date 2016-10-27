@@ -70,8 +70,12 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
                 doLogin();
                 break;
             case R.id.btn_login_register:
+                showRegister();
                 break;
             case R.id.btn_login_forgot:
+                showForgotPassword();
+                break;
+            default:
                 break;
         }
     }
@@ -91,5 +95,13 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
             this.loginPresenter.login(this.editTextPhoneNumber.getText().toString(),
                     this.editTextPassword.getText().toString());
         }
+    }
+
+    private void showRegister(){
+        RegisterActivity.actionStart(this, this.editTextPhoneNumber.getText().toString());
+    }
+
+    private void showForgotPassword(){
+
     }
 }

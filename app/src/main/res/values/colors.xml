@@ -21,6 +21,6 @@
     <color name="colorInputHintText">#FFCCCCCC</color>
     <color name="colorSeparatorLine">#FFDCDCDC</color>
     <color name="colorBtnWarnningNormal">#FFFF0000</color>
-    <color name="colorBtnWarnningDisable">#51ea421b</color>
-    <color name="colorBtnWarnningPressed">#FFea421b</color>
+    <color name="colorBtnWarnningDisable">#31ea421b</color>
+    <color name="colorBtnWarnningPressed">#88FF0000</color>
 </resources>

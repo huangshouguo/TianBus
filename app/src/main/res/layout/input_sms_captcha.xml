@@ -24,10 +24,10 @@
     <!--timmer-->
     <Button
         android:id="@+id/btn_sms_captch_timmer"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="match_parent"
         android:background="@drawable/button_background_warn"
         android:text="点击发送"
-        android:textSize="@dimen/button_text_font_size"
+        android:textSize="@dimen/ft16"
         android:textColor="@color/colorBtnTextNormal" />
 </LinearLayout>

@@ -1,12 +1,46 @@
 package com.bus.tian.tianbus.view.login;
 
 
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import com.bus.tian.tianbus.R;
 import com.bus.tian.tianbus.contract.IFinishRegisterContract;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.view.BaseFragment;
 
-public class FinishRegisterFragment extends BaseFragment implements IFinishRegisterContract.IView{
+import java.util.Timer;
+import java.util.TimerTask;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class FinishRegisterFragment extends BaseFragment implements IFinishRegisterContract.IView {
+
+    @BindView(R.id.text_register_finish_remainder)
+    TextView texRemainder;
+    @BindView(R.id.edit_text_sms_captcha)
+    EditText editTextSmsCaptcha;
+    @BindView(R.id.btn_sms_captch_timmer)
+    Button btnSmsCaptchTimmer;
+    @BindView(R.id.edit_text_password)
+    EditText editTextPassword;
+    @BindView(R.id.edit_text_password_confirm)
+    EditText editTextPasswordConfirm;
+    @BindView(R.id.btn_finish_register)
+    Button btnFinishRegister;
+
+    IFinishRegisterContract.IPresenter presenter;
+
+    private RegisterActivity registerActivity;
+    private String strMosaicPhoneNumber;
+    private String strSmsCaptchaId;
+
 
     @Override
     protected int getContentViewResId() {
@@ -15,26 +49,122 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
 
     @Override
     protected void initData() {
+        sendSmsCaptcha();
 
+//        this.presenter = new FinishRegisterPresenter(this);
     }
 
     @Override
     protected void initView() {
-
+        ButterKnife.bind(this, rootView);
+        this.texRemainder.setText(getRemainderMessage());
     }
 
     @Override
     protected void onRelease() {
-
+        if (this.presenter != null) {
+            this.presenter.onRelease();
+        }
     }
 
     @Override
     public void updateSmsCaptchaView(UserBean userBean) {
+        if (userBean != null) {
+            this.strMosaicPhoneNumber = userBean.getPhone();
+            this.strSmsCaptchaId = userBean.getCaptchaId();
+            this.texRemainder.setText(getRemainderMessage());
+            startTimer();
+        }
 
     }
 
     @Override
     public void updateRegisterView(UserBean userBean) {
 
+    }
+
+    @OnClick({R.id.btn_sms_captch_timmer, R.id.btn_finish_register})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_sms_captch_timmer:
+                sendSmsCaptcha();
+                break;
+            case R.id.btn_finish_register:
+                doRegister();
+                break;
+        }
+    }
+
+    private void startTimer() {
+        this.btnSmsCaptchTimmer.setEnabled(false);
+
+        Timer timer = new Timer();
+        Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                int time = msg.arg1;
+                btnSmsCaptchTimmer.setText(time + "s");
+                if (time <= 0) {
+                    timer.cancel();
+                    btnSmsCaptchTimmer.setText(R.string.text_resent_onclick);
+                    btnSmsCaptchTimmer.setEnabled(true);
+                }
+            }
+        };
+
+        TimerTask task = new TimerTask() {
+            int time = 60;
+
+            @Override
+            public void run() {
+                Message message = new Message();
+                message.arg1 = time--;
+                handler.sendMessage(message);
+            }
+        };
+
+        timer.schedule(task, 1000, 1000);
+    }
+
+    private void sendSmsCaptcha() {
+        if (this.presenter != null) {
+            this.presenter.loadSmsCaptcha(getInputPhoneNumber());
+        }
+    }
+
+    private void doRegister() {
+        if (shouldDoRegister()) {
+            didRegister();
+        } else {
+            this.editTextPassword.getText().clear();
+            this.editTextPasswordConfirm.getText().clear();
+        }
+    }
+
+    private boolean shouldDoRegister() {
+        return (this.presenter != null) && this.presenter.confirmPassword(
+                this.editTextPassword.getText().toString(),
+                this.editTextPasswordConfirm.getText().toString());
+    }
+
+    private void didRegister() {
+        if (this.presenter != null) {
+            this.presenter.doRegister(getInputPhoneNumber(),
+                    this.editTextPassword.getText().toString(),
+                    this.editTextSmsCaptcha.getText().toString(),
+                    this.strSmsCaptchaId);
+        }
+    }
+
+    private String getInputPhoneNumber() {
+        return (this.registerActivity != null) ? this.registerActivity.getInputPhoneNumber() : null;
+    }
+
+    private String getMosaicPhoneNumber() {
+        return this.strMosaicPhoneNumber;
+    }
+
+    private String getRemainderMessage() {
+        return "短信验证码已经发送至您的手机：" + getMosaicPhoneNumber() + "，请注意查收并完成密码的设置。";
     }
 }

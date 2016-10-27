@@ -18,19 +18,15 @@ public class ProgressObserver {
     private Activity activity;
     private Observer<String> observer;
     private ProgressDialog progressDialog;
-    private boolean shouldHideLoading;
 
     public ProgressObserver(BaseActivity baseActivity) {
         this.activity = baseActivity;
-        this.shouldHideLoading = false;
-
         initObserver();
         initProgress();
     }
 
     public Observer<String> showLoading(@NonNull final String loadingMessage, @NonNull final boolean shouldHideLoading) {
-        this.shouldHideLoading = shouldHideLoading;
-        showProgress(loadingMessage);
+        showProgress(loadingMessage, shouldHideLoading);
         return getObserver();
     }
 
@@ -64,7 +60,7 @@ public class ProgressObserver {
 
             @Override
             public void onNext(String s) {
-                showProgress(s);
+                setMessage(s);
             }
         };
     }
@@ -84,20 +80,28 @@ public class ProgressObserver {
         }
     }
 
-    private void showProgress(@NonNull final String showMessage) {
-        if ((this.progressDialog != null) && !TextUtils.isEmpty(showMessage) && !this.shouldHideLoading) {
-            if (this.progressDialog.isShowing()) {
-                this.progressDialog.dismiss();
+    private void showProgress(@NonNull final String showMessage,  boolean shouldHideLoading) {
+        if ((this.progressDialog != null)) {
+            if (!shouldHideLoading && !this.progressDialog.isShowing()){
+                this.progressDialog.show();
             }
-            this.progressDialog.setMessage(showMessage);
-            this.progressDialog.show();
         }
+
+        getObserver().onNext(showMessage);
     }
 
     private void hideProgress() {
         if (this.progressDialog != null) {
             if (this.progressDialog.isShowing()) {
                 this.progressDialog.dismiss();
+            }
+        }
+    }
+
+    private void setMessage(final String msg){
+        if (!TextUtils.isEmpty(msg)){
+            if (this.progressDialog != null && this.progressDialog.isShowing()){
+                this.progressDialog.setMessage(msg);
             }
         }
     }

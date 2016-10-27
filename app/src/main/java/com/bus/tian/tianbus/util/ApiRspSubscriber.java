@@ -58,9 +58,11 @@ public class ApiRspSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onCompleted() {
-        if (this.progressObserver != null) {
-            this.progressObserver.onCompleted();
+        if (this.progressObserver == null) {
+            Log.e(TAG, "onCompleted: progressObserver is null");
+            return;
         }
+        this.progressObserver.onCompleted();
     }
 
     @Override
@@ -85,9 +87,12 @@ public class ApiRspSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onNext(T t) {
-        if (this.progressObserver != null) {
-            this.progressObserver.onNext("数据加载成功!");
+        if (this.progressObserver == null) {
+            Log.e(TAG, "onNext: progressObserver is null");
+            return;
         }
+
+        this.progressObserver.onNext("数据加载成功!");
     }
 
     private String getErrorMessage(Throwable e) {

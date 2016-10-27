@@ -56,6 +56,11 @@ public class FinishRegisterPresenter extends BasePresenter implements IFinishReg
     }
 
     @Override
+    public boolean confirmPassword(String inputPwd, String confirmPwd) {
+        return ValidateUtil.validateConfirmPassword(this.view, inputPwd, confirmPwd);
+    }
+
+    @Override
     public void doRegister(String phoneNumber, String pwd, String captchaValue, String captchaId) {
         if (this.view == null) {
             Log.e(TAG, "doRegister: view is null");
@@ -71,7 +76,7 @@ public class FinishRegisterPresenter extends BasePresenter implements IFinishReg
             return;
         }
 
-        if (!ValidateUtil.validatePassword(this.view, captchaValue)) {
+        if (!ValidateUtil.validateSmsCaptchaValue(this.view, captchaValue)) {
             Log.e(TAG, "loadSmsCaptcha: input params error, captchaValue = " + captchaValue);
             return;
         }

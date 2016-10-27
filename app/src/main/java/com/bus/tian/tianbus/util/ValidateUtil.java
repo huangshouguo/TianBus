@@ -58,6 +58,19 @@ public class ValidateUtil {
         return true;
     }
 
+    public static boolean validateConfirmPassword(IBaseContract.IBaseView view, final String password, final String confirmPassword) {
+        if (!validatePassword(view, password)) {
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            view.showErrorMessage(ErrorMsgUtil.ERR_MSG_PASSWORD_DIFF);
+            return false;
+        }
+
+        return true;
+    }
+
     public static boolean validateSmsCaptchaValue(final IBaseContract.IBaseView view, final String captchaValue) {
         if (view == null) {
             Log.e(TAG, "validatePhoneNumber: input params error, view = " + view);
