@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.bus.tian.tianbus.contract.IBaseContract;
+import com.bus.tian.tianbus.util.ProgressObserver;
 import com.trello.rxlifecycle.LifecycleProvider;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.RxLifecycle;
@@ -25,8 +26,10 @@ import rx.subjects.BehaviorSubject;
 
 public abstract class BaseActivity extends AppCompatActivity implements IBaseContract.IBaseView, LifecycleProvider<ActivityEvent> {
     protected final String TAG = this.getClass().getSimpleName();
-    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
     protected Context context;
+
+    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
+    private ProgressObserver progressObserver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +74,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
     protected void onDestroy() {
         this.lifecycleSubject.onNext(ActivityEvent.DESTROY);
         this.onRelease();
+
+        if (this.progressObserver != null) {
+            this.progressObserver.onRelease();
+            this.progressObserver = null;
+        }
+
         super.onDestroy();
     }
 
@@ -80,9 +89,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
     }
 
     @Override
-    public Observer<String> showProgress(boolean shouldHideProgressDialog) {
-        //// TODO: 10/26/16 show progress
-        return null;
+    public Observer<String> showProgress(String loadingMessage, boolean shouldHideProgress) {
+        return getProgressObserver().showLoading(loadingMessage, shouldHideProgress);
     }
 
     @Nonnull
@@ -120,4 +128,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
     protected abstract void initView();
 
     protected abstract void onRelease();
+
+    private ProgressObserver getProgressObserver() {
+        if (this.progressObserver == null) {
+            this.progressObserver = new ProgressObserver(this);
+        }
+        return this.progressObserver;
+    }
 }

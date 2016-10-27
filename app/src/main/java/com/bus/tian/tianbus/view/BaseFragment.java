@@ -15,6 +15,7 @@ import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 import javax.annotation.Nonnull;
 
 import rx.Observable;
+import rx.Observer;
 import rx.subjects.BehaviorSubject;
 
 /**
@@ -24,12 +25,12 @@ import rx.subjects.BehaviorSubject;
 public abstract class BaseFragment extends Fragment implements IBaseContract.IBaseView, LifecycleProvider<FragmentEvent> {
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
-    protected Context context;
+    protected BaseActivity baseActivity;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = context;
+        this.baseActivity = (BaseActivity) context;
         this.lifecycleSubject.onNext(FragmentEvent.ATTACH);
     }
 
@@ -84,7 +85,23 @@ public abstract class BaseFragment extends Fragment implements IBaseContract.IBa
     @Override
     public void onDetach() {
         this.lifecycleSubject.onNext(FragmentEvent.DETACH);
+        onRelease();
         super.onDetach();
+    }
+
+    @Override
+    public void showErrorMessage(String errorMsg) {
+        if (this.baseActivity != null){
+            this.baseActivity.showErrorMessage(errorMsg);
+        }
+    }
+
+    @Override
+    public Observer<String> showProgress(String loadingMessage, boolean shouldHideProgress) {
+        if (this.baseActivity != null){
+            this.baseActivity.showProgress(loadingMessage, shouldHideProgress);
+        }
+        return null;
     }
 
     @Nonnull
@@ -114,4 +131,6 @@ public abstract class BaseFragment extends Fragment implements IBaseContract.IBa
     protected abstract void initData();
 
     protected abstract void initView();
+
+    protected abstract void onRelease();
 }

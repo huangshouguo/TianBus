@@ -1,12 +1,13 @@
 package com.bus.tian.tianbus.util;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.bus.tian.tianbus.contract.IBaseContract;
 
 import java.net.ConnectException;
-import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 import retrofit2.adapter.rxjava.HttpException;
@@ -21,41 +22,65 @@ public class ApiRspSubscriber<T> extends Subscriber<T> {
     private static final String TAG = "ApiRspSubscriber";
 
     private IBaseContract.IBaseView baseView;
+    private String loadingMessage;
     private boolean shouldHideProgressDialog;
     private Observer<String> progressObserver;
 
-    public ApiRspSubscriber(@NonNull IBaseContract.IBaseView baseView) {
-        this(baseView, false);
+    public ApiRspSubscriber(@NonNull final IBaseContract.IBaseView baseView) {
+        this(baseView, "正在加载数据...");
     }
 
-    public ApiRspSubscriber(@NonNull IBaseContract.IBaseView baseView, @NonNull boolean shouldHideProgressDialog) {
+    public ApiRspSubscriber(@NonNull final IBaseContract.IBaseView baseView, @NonNull final String loadingMessage) {
+        this(baseView, loadingMessage, false);
+    }
+
+    public ApiRspSubscriber(@NonNull final IBaseContract.IBaseView baseView, @NonNull final String loadingMessage, @NonNull final boolean shouldHideProgressDialog) {
         this.baseView = baseView;
+        this.loadingMessage = loadingMessage;
         this.shouldHideProgressDialog = shouldHideProgressDialog;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (this.baseView != null) {
-            this.progressObserver = this.baseView.showProgress(this.shouldHideProgressDialog);
+        if (TextUtils.isEmpty(this.loadingMessage)) {
+            Log.e(TAG, "onStart: loadingMessage is empty!");
+            return;
         }
+
+        if (this.baseView == null) {
+            Log.e(TAG, "onStart: baseView is null!");
+            return;
+        }
+
+        this.progressObserver = this.baseView.showProgress(this.loadingMessage, this.shouldHideProgressDialog);
     }
 
     @Override
     public void onCompleted() {
-        if (this.progressObserver != null)
+        if (this.progressObserver != null) {
             this.progressObserver.onCompleted();
+        }
     }
 
     @Override
     public void onError(Throwable e) {
         Log.e(TAG, "onError:", e);
 
-        if (this.progressObserver != null) {
-            this.progressObserver.onError(new Throwable(getErrorMessage(e)));
+        if (this.progressObserver == null) {
+            Log.e(TAG, "onError: progressObserver is null");
+            return;
         }
 
-        Log.e(TAG, "onError: errorMsg = " + getErrorMessage(e));
+        if (this.baseView == null) {
+            Log.e(TAG, "onError: baseView is null");
+            return;
+        }
+
+        Log.e(TAG, "onError: ErrorMsgShowingToUser = " + getErrorMessage(e));
+
+        this.progressObserver.onError(new Throwable(getErrorMessage(e)));
+        this.baseView.showErrorMessage(getErrorMessage(e));
     }
 
     @Override
@@ -74,7 +99,7 @@ public class ApiRspSubscriber<T> extends Subscriber<T> {
             errorMsg = ErrorMsgUtil.ERR_MSG_UNKNOWN_HOST;
         } else if (e instanceof ConnectException) {
             errorMsg = ErrorMsgUtil.ERR_MSG_CONNECT_ERROR;
-        } else if (e instanceof SocketException) {
+        } else if (e instanceof SocketTimeoutException) {
             errorMsg = ErrorMsgUtil.ERR_MSG_SOCKET_TIMEOUT;
         }
 

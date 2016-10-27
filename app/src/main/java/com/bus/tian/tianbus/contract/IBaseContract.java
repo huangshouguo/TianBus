@@ -14,7 +14,8 @@ public interface IBaseContract {
         <T> LifecycleTransformer<T> doBindToLifecycle();
 
         void showErrorMessage(final String errorMsg);
-        Observer<String> showProgress(final boolean shouldHideProgressDialog);
+
+        Observer<String> showProgress(final String loadingMessage, final boolean shouldHideProgressDialog);
     }
 
     interface IBasePresenter {
