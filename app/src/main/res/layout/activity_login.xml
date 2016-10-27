@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,17 +15,17 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/logo_blue"/>
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/logo_blue" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingBottom="15dp"
             android:text="@string/app_name"
             android:textColor="@color/colorContentTitle"
-            android:textSize="@dimen/ft20"/>
+            android:textSize="@dimen/ft16" />
 
     </LinearLayout>
 
@@ -36,18 +35,18 @@
         android:orientation="vertical">
 
         <!--separator-->
-        <include layout="@layout/separator_line"/>
+        <include layout="@layout/separator_line" />
         <!--phone number-->
-        <include layout="@layout/input_phone"/>
+        <include layout="@layout/input_phone" />
 
         <!--middle separator-->
-        <include layout="@layout/separator_line_middle"/>
+        <include layout="@layout/separator_line_middle" />
 
         <!--password-->
-        <include layout="@layout/input_password"/>
+        <include layout="@layout/input_password" />
 
         <!--separator-->
-        <include layout="@layout/separator_line"/>
+        <include layout="@layout/separator_line" />
     </LinearLayout>
 
     <!--submit-->
@@ -55,7 +54,7 @@
         android:id="@+id/btn_login"
         style="@style/ButtonTheme.Radius"
         android:layout_marginTop="20dp"
-        android:text="@string/text_login"/>
+        android:text="@string/text_login" />
 
     <!--register & forgot password-->
     <LinearLayout
@@ -63,30 +62,30 @@
         android:layout_height="0dp"
         android:layout_weight="4"
         android:orientation="horizontal"
-        android:paddingTop="10dp"
         android:paddingLeft="@dimen/default_left_gap"
-        android:paddingRight="@dimen/default_right_gap">
+        android:paddingRight="@dimen/default_right_gap"
+        android:paddingTop="10dp">
 
         <!--register-->
         <Button
             android:id="@+id/btn_login_register"
             style="@style/ButtonTheme.White"
-            android:text="@string/text_register"/>
+            android:text="@string/text_register" />
 
         <!--separator-->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:paddingTop="15dp"
+            android:layout_height="50dp"
             android:paddingBottom="15dp"
-            android:layout_height="50dp">
+            android:paddingTop="15dp">
 
-            <include layout="@layout/separator_line_insert"/>
+            <include layout="@layout/separator_line_insert" />
         </LinearLayout>
 
         <!--forgot password-->
         <Button
             android:id="@+id/btn_login_forgot"
             style="@style/ButtonTheme.White"
-            android:text="@string/text_forgot_password"/>
+            android:text="@string/text_forgot_password" />
     </LinearLayout>
 </LinearLayout>
