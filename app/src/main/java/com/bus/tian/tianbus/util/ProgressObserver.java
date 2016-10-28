@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.bus.tian.tianbus.view.BaseActivity;
 
@@ -15,6 +16,7 @@ import rx.Observer;
  */
 
 public class ProgressObserver {
+    private static final String TAG = "ProgressObserver";
     private Activity activity;
     private Observer<String> observer;
     private ProgressDialog progressDialog;
@@ -26,11 +28,15 @@ public class ProgressObserver {
     }
 
     public Observer<String> showLoading(@NonNull final String loadingMessage, @NonNull final boolean shouldHideLoading) {
+        Log.d(TAG, "showLoading() called with: loadingMessage = [" + loadingMessage + "], shouldHideLoading = [" + shouldHideLoading + "]");
+
         showProgress(loadingMessage, shouldHideLoading);
         return getObserver();
     }
 
     public void onRelease() {
+        Log.w(TAG, "onRelease");
+
         if (this.progressDialog != null) {
             hideProgress();
             this.progressDialog = null;
@@ -46,6 +52,8 @@ public class ProgressObserver {
     }
 
     private void initObserver() {
+        Log.d(TAG, "initObserver() called");
+
         this.observer = new Observer<String>() {
 
             @Override
@@ -66,6 +74,8 @@ public class ProgressObserver {
     }
 
     private void initProgress() {
+        Log.d(TAG, "initProgress() called");
+
         if (this.activity != null) {
             this.progressDialog = new ProgressDialog(this.activity);
             this.progressDialog.setIndeterminate(true);
@@ -80,9 +90,11 @@ public class ProgressObserver {
         }
     }
 
-    private void showProgress(@NonNull final String showMessage,  boolean shouldHideLoading) {
+    private void showProgress(@NonNull final String showMessage, boolean shouldHideLoading) {
+        Log.d(TAG, "showProgress() called with: showMessage = [" + showMessage + "], shouldHideLoading = [" + shouldHideLoading + "]");
+
         if ((this.progressDialog != null)) {
-            if (!shouldHideLoading && !this.progressDialog.isShowing()){
+            if (!shouldHideLoading && !this.progressDialog.isShowing()) {
                 this.progressDialog.show();
             }
         }
@@ -91,6 +103,8 @@ public class ProgressObserver {
     }
 
     private void hideProgress() {
+        Log.d(TAG, "hideProgress() called");
+
         if (this.progressDialog != null) {
             if (this.progressDialog.isShowing()) {
                 this.progressDialog.dismiss();
@@ -98,15 +112,19 @@ public class ProgressObserver {
         }
     }
 
-    private void setMessage(final String msg){
-        if (!TextUtils.isEmpty(msg)){
-            if (this.progressDialog != null && this.progressDialog.isShowing()){
+    private void setMessage(final String msg) {
+        Log.d(TAG, "setMessage() called with: msg = [" + msg + "]");
+
+        if (!TextUtils.isEmpty(msg)) {
+            if (this.progressDialog != null && this.progressDialog.isShowing()) {
                 this.progressDialog.setMessage(msg);
             }
         }
     }
 
     private Observer<String> getObserver() {
+        Log.d(TAG, "getObserver() called");
+
         if (this.observer == null) {
             initObserver();
         }

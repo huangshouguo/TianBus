@@ -79,8 +79,6 @@ public class ApiRspSubscriber<T> extends Subscriber<T> {
             return;
         }
 
-        Log.e(TAG, "onError: ErrorMsgShowingToUser = " + getErrorMessage(e));
-
         this.progressObserver.onError(new Throwable(getErrorMessage(e)));
         this.baseView.showErrorMessage(getErrorMessage(e));
     }
@@ -108,6 +106,7 @@ public class ApiRspSubscriber<T> extends Subscriber<T> {
             errorMsg = ErrorMsgUtil.ERR_MSG_SOCKET_TIMEOUT;
         }
 
+        Log.d(TAG, "getErrorMessage() returned: " + errorMsg);
         return errorMsg;
     }
 }
