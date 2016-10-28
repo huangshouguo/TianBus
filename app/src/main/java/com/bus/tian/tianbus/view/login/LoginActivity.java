@@ -57,7 +57,7 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
 
     @Override
     protected void onRelease() {
-        if (this.loginPresenter != null){
+        if (this.loginPresenter != null) {
             this.loginPresenter.onRelease();
         }
     }
@@ -84,23 +84,23 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
 
     }
 
-    public static void actionStart(Context context){
+    public static void actionStart(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 
-    private void doLogin(){
-        if (this.loginPresenter != null){
+    private void doLogin() {
+        if (this.loginPresenter != null) {
             this.loginPresenter.login(this.editTextPhoneNumber.getText().toString(),
                     this.editTextPassword.getText().toString());
         }
     }
 
-    private void showRegister(){
+    private void showRegister() {
         RegisterActivity.actionStart(this, this.editTextPhoneNumber.getText().toString());
     }
 
-    private void showForgotPassword(){
-
+    private void showForgotPassword() {
+        ForgotPasswordActivity.actionStart(this, this.editTextPhoneNumber.getText().toString());
     }
 }

@@ -65,4 +65,12 @@
         <item name="android:singleLine">true</item>
         <item name="android:drawablePadding">@dimen/icon_content_padding</item>
     </style>
+
+    <style name="TextRemainderSytle" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/default_left_gap</item>
+        <item name="android:textSize">@dimen/ft14</item>
+        <item name="android:textColor">@color/colorTextRemainder</item>
+    </style>
 </resources>

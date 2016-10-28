@@ -1,6 +1,5 @@
 package com.bus.tian.tianbus.presenter;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.bus.tian.tianbus.contract.IPreRegisterContract;
@@ -9,6 +8,7 @@ import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.ApiRspSubscriber;
 import com.bus.tian.tianbus.util.ErrorMsgUtil;
+import com.bus.tian.tianbus.util.ValidateUtil;
 
 import rx.Subscription;
 
@@ -32,8 +32,7 @@ public class PreRegisterPresenter extends BasePresenter implements IPreRegisterC
             return;
         }
 
-        if (TextUtils.isEmpty(phoneNumber)) {
-            this.view.showErrorMessage(ErrorMsgUtil.ERR_MSG_PHONE_EMPTY);
+        if (!ValidateUtil.validatePhoneNumber(this.view, phoneNumber)) {
             Log.e(TAG, "findUserByPhoneNumber: input params error, phoneNumber = " + phoneNumber);
             return;
         }

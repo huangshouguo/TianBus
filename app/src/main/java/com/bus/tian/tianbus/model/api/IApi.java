@@ -33,6 +33,14 @@ public interface IApi {
             @Field("captchaId") String captchaId);
 
     @FormUrlEncoded
+    @POST("resetpassword")
+    Observable<ApiResponseBean<UserBean>> resetPassword(
+            @Field("phone") String phone,
+            @Field("password") String password,
+            @Field("captcha") String captchaValue,
+            @Field("captchaId") String captchaId);
+
+    @FormUrlEncoded
     @POST("login")
     Observable<ApiResponseBean<UserBean>> login(
             @Field("phone") String phone,

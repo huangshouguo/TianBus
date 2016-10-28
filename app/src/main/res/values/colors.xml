@@ -23,4 +23,5 @@
     <color name="colorBtnWarnningNormal">#FFFF0000</color>
     <color name="colorBtnWarnningDisable">#56ea421b</color>
     <color name="colorBtnWarnningPressed">#FF660000</color>
+    <color name="colorTextRemainder">#FF888888</color>
 </resources>
