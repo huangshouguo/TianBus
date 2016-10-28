@@ -10,11 +10,16 @@ import android.widget.TextView;
 
 import com.bus.tian.tianbus.R;
 import com.bus.tian.tianbus.contract.IFinishRegisterContract;
+import com.bus.tian.tianbus.di.component.DaggerIFinishRegisterComponent;
+import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
+import com.bus.tian.tianbus.di.module.FinishRegisterModule;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.view.BaseFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +40,7 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
     @BindView(R.id.btn_finish_register)
     Button btnFinishRegister;
 
+    @Inject
     IFinishRegisterContract.IPresenter presenter;
 
     private RegisterActivity registerActivity;
@@ -49,9 +55,14 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
 
     @Override
     protected void initData() {
-        sendSmsCaptcha();
+        DaggerIFinishRegisterComponent.builder()
+                .iNetCompoent(DaggerINetCompoent.create())
+                .finishRegisterModule(new FinishRegisterModule(this))
+                .build()
+                .inject(this);
 
-//        this.presenter = new FinishRegisterPresenter(this);
+        this.registerActivity = (RegisterActivity) getActivity();
+        sendSmsCaptcha();
     }
 
     @Override
@@ -103,7 +114,7 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
             @Override
             public void handleMessage(Message msg) {
                 int time = msg.arg1;
-                btnSmsCaptchTimmer.setText(time + "s");
+                btnSmsCaptchTimmer.setText(String.valueOf(time) + "s");
                 if (time <= 0) {
                     timer.cancel();
                     btnSmsCaptchTimmer.setText(R.string.text_resent_onclick);
@@ -165,6 +176,6 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
     }
 
     private String getRemainderMessage() {
-        return "短信验证码已经发送至您的手机：" + getMosaicPhoneNumber() + "，请注意查收并完成密码的设置。";
+        return "短信验证码已经发送至您的手机：" + getInputPhoneNumber() + "，请注意查收并完成密码的设置。";
     }
 }

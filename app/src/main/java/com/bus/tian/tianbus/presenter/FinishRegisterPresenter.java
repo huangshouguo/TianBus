@@ -9,8 +9,6 @@ import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.ApiRspSubscriber;
 import com.bus.tian.tianbus.util.ValidateUtil;
 
-import javax.inject.Inject;
-
 import rx.Observable;
 import rx.Subscription;
 import rx.functions.Func1;
@@ -23,7 +21,6 @@ public class FinishRegisterPresenter extends BasePresenter implements IFinishReg
 
     private IFinishRegisterContract.IView view;
 
-    @Inject
     public FinishRegisterPresenter(IFinishRegisterContract.IView view) {
         super(view);
         this.view = view;

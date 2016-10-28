@@ -10,9 +10,8 @@ import com.bus.tian.tianbus.R;
 import com.bus.tian.tianbus.contract.ILoginContract;
 import com.bus.tian.tianbus.di.component.DaggerILoginComponent;
 import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
-import com.bus.tian.tianbus.di.module.LoginPresenterModule;
+import com.bus.tian.tianbus.di.module.LoginModule;
 import com.bus.tian.tianbus.model.bean.UserBean;
-import com.bus.tian.tianbus.presenter.LoginPresenter;
 import com.bus.tian.tianbus.view.BaseActivity;
 
 import javax.inject.Inject;
@@ -35,7 +34,7 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
     Button btnForgot;
 
     @Inject
-    LoginPresenter loginPresenter;
+    ILoginContract.IPresenter loginPresenter;
 
     @Override
     protected int getContentViewResId() {
@@ -46,7 +45,7 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
     protected void initData() {
         DaggerILoginComponent.builder()
                 .iNetCompoent(DaggerINetCompoent.create())
-                .loginPresenterModule(new LoginPresenterModule(this))
+                .loginModule(new LoginModule(this))
                 .build()
                 .inject(this);
     }

@@ -10,8 +10,6 @@ import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.ApiRspSubscriber;
 import com.bus.tian.tianbus.util.ErrorMsgUtil;
 
-import javax.inject.Inject;
-
 import rx.Subscription;
 
 /**
@@ -22,7 +20,6 @@ public class PreRegisterPresenter extends BasePresenter implements IPreRegisterC
 
     private IPreRegisterContract.IView view;
 
-    @Inject
     public PreRegisterPresenter(IPreRegisterContract.IView view) {
         super(view);
         this.view = view;

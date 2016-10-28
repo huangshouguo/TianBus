@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.bus.tian.tianbus.R;
 import com.bus.tian.tianbus.view.BaseActivity;
@@ -73,6 +74,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     public void setInputPhoneNumber(final String inputPhoneNumber){
+        Log.d(TAG, "setInputPhoneNumber() called with: inputPhoneNumber = [" + inputPhoneNumber + "]");
         this.strInputPhoneNumber = inputPhoneNumber;
     }
 

@@ -6,7 +6,7 @@ package com.bus.tian.tianbus.model.bean;
 
 public class ApiResponseBean<T> {
     private int code;
-    private String message;
+    private String msg;
     private T data;
 
     public int getCode() {
@@ -17,12 +17,12 @@ public class ApiResponseBean<T> {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public T getData() {
@@ -37,7 +37,7 @@ public class ApiResponseBean<T> {
     public String toString() {
         return "ApiResponseBean{" +
                 "code=" + code +
-                ", message='" + message + '\'' +
+                ", msg='" + msg + '\'' +
                 ", data=" + data +
                 '}';
     }

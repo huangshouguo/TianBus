@@ -86,7 +86,7 @@ public class BasePresenter implements IBaseContract.IBasePresenter {
                             if (tApiResponseBean.getCode() == ApiResponseCode.API_RSP_CODE_SUCCEED) {
                                 return createData(tApiResponseBean.getData());
                             }
-                            return Observable.error(new Throwable(tApiResponseBean.getMessage()));
+                            return Observable.error(new Throwable(tApiResponseBean.getMsg()));
                         }
                         return Observable.error(new Throwable(ErrorMsgUtil.ERR_MSG_SERVER_ERROR));
                     }

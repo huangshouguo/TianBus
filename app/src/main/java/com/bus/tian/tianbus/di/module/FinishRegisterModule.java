@@ -1,6 +1,7 @@
 package com.bus.tian.tianbus.di.module;
 
 import com.bus.tian.tianbus.contract.IFinishRegisterContract;
+import com.bus.tian.tianbus.presenter.FinishRegisterPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,7 +19,7 @@ public class FinishRegisterModule {
     }
 
     @Provides
-    public IFinishRegisterContract.IView provideFinishRegisterContractView(){
-        return this.view;
+    public IFinishRegisterContract.IPresenter provideFinishRegisterContractPresenter(){
+        return new FinishRegisterPresenter(this.view);
     }
 }

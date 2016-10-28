@@ -113,7 +113,7 @@ public class ProgressObserver {
     }
 
     private void setMessage(final String msg) {
-        Log.d(TAG, "setMessage() called with: msg = [" + msg + "]");
+        Log.d(TAG, "setMsg() called with: msg = [" + msg + "]");
 
         if (!TextUtils.isEmpty(msg)) {
             if (this.progressDialog != null && this.progressDialog.isShowing()) {

@@ -10,15 +10,15 @@ import dagger.Provides;
  * Created by hsg on 2016/10/26.
  */
 @Module
-public class LoginPresenterModule {
+public class LoginModule {
     private ILoginContract.IView view;
 
-    public LoginPresenterModule(ILoginContract.IView view) {
+    public LoginModule(ILoginContract.IView view) {
         this.view = view;
     }
 
     @Provides
-    public LoginPresenter provideLoginPresenter() {
+    public ILoginContract.IPresenter provideLoginPresenter() {
         return new LoginPresenter(this.view);
     }
 }

@@ -6,9 +6,13 @@ import android.widget.EditText;
 
 import com.bus.tian.tianbus.R;
 import com.bus.tian.tianbus.contract.IPreRegisterContract;
+import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
+import com.bus.tian.tianbus.di.component.DaggerIPreRegisterComponent;
+import com.bus.tian.tianbus.di.module.PreRegisterModule;
 import com.bus.tian.tianbus.model.bean.UserBean;
-import com.bus.tian.tianbus.presenter.PreRegisterPresenter;
 import com.bus.tian.tianbus.view.BaseFragment;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +25,7 @@ public class PreRegisterFragment extends BaseFragment implements IPreRegisterCon
     @BindView(R.id.btn_next_register)
     Button btnNextRegister;
 
+    @Inject
     IPreRegisterContract.IPresenter presenter;
 
     private RegisterActivity registerActivity;
@@ -33,9 +38,13 @@ public class PreRegisterFragment extends BaseFragment implements IPreRegisterCon
 
     @Override
     protected void initData() {
-        ButterKnife.bind(this, rootView);
+        DaggerIPreRegisterComponent.builder()
+                .iNetCompoent(DaggerINetCompoent.create())
+                .preRegisterModule(new PreRegisterModule(this))
+                .build()
+                .inject(this);
+
         this.registerActivity = (RegisterActivity) getActivity();
-        this.presenter = new PreRegisterPresenter(this);
     }
 
     @Override

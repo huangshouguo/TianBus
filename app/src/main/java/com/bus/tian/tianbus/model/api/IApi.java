@@ -5,9 +5,7 @@ import com.bus.tian.tianbus.model.bean.UserBean;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -21,9 +19,10 @@ public interface IApi {
     Observable<ApiResponseBean<UserBean>> findUserByPhoneNumber(
             @Field("phone") String phoneNumber);
 
-    @GET("getcaptcha")
+    @FormUrlEncoded
+    @POST("getcaptcha")
     Observable<ApiResponseBean<UserBean>> sendSmsCaptcha(
-            @Query("phone") String phoneNumber);
+            @Field("phone") String phoneNumber);
 
     @FormUrlEncoded
     @POST("register")
