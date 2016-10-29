@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
 
     @Override
     public void updateLoginView(UserBean userBean) {
-
+        finish();
     }
 
     public static void actionStart(Context context) {
@@ -91,7 +91,8 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
 
     private void doLogin() {
         if (this.loginPresenter != null) {
-            this.loginPresenter.login(this.editTextPhoneNumber.getText().toString(),
+            this.loginPresenter.login(
+                    this.editTextPhoneNumber.getText().toString(),
                     this.editTextPassword.getText().toString());
         }
     }
