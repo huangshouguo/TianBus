@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -69,6 +70,7 @@ public class ForgotPasswordActivity extends BaseActivity implements IForgotPassw
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        initToolBar();
         this.btnForgotPassword.setEnabled(false);
     }
 
@@ -116,6 +118,12 @@ public class ForgotPasswordActivity extends BaseActivity implements IForgotPassw
         context.startActivity(intent);
     }
 
+    private void initToolBar(){
+        setSupportActionBar(this.toolBar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.text_reset_login_password);
+    }
+
     private void startTimer() {
         this.btnSmsCaptchTimmer.setEnabled(false);
 
@@ -154,12 +162,15 @@ public class ForgotPasswordActivity extends BaseActivity implements IForgotPassw
     }
 
     private String getRemainderMessage() {
-        return "短信验证码已经发送至您的手机：" + this.editTextPhoneNumber.getText().toString() + "，请注意查收并完成密码的设置。";
+        return "短信验证码已经发送至您的手机：" +
+                this.editTextPhoneNumber.getText().toString() +
+                "，请注意查收并完成密码的设置。";
     }
 
     private void doResetPassword() {
         if (this.presenter != null) {
-            this.presenter.doResetPassword(this.editTextPhoneNumber.getText().toString(),
+            this.presenter.doResetPassword(
+                    this.editTextPhoneNumber.getText().toString(),
                     this.editTextPassword.getText().toString(),
                     this.editTextPasswordConfirm.getText().toString(),
                     this.editTextSmsCaptcha.getText().toString(),
