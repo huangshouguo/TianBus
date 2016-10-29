@@ -40,16 +40,10 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
     DrawerLayout drawerLayout;
     @BindString(R.string.app_name)
     String strAppName;
-
     @Inject
     IMainContract.IPresenter presenter;
 
     private HeaderHolder headerHolder;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
     @Override
     protected int getContentViewResId() {
@@ -118,7 +112,7 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(item -> {
                 switch (item.getItemId()) {
-                    case R.id.menu_bout_us:
+                    case R.id.menu_home:
                         break;
                     case R.id.menu_help:
                         break;
