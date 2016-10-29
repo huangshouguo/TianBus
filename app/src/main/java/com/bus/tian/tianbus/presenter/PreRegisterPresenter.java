@@ -45,7 +45,7 @@ public class PreRegisterPresenter extends BasePresenter implements IPreRegisterC
                         if (userBeanApiResponseBean.getCode() == ApiResponseCode.API_RSP_CODE_SUCCEED){
                             view.updateView(userBeanApiResponseBean.getData());
                         } else {
-                            view.showErrorMessage(ErrorMsgUtil.ERR_MSG_USER_REGISTED);
+                            view.showErrorMessage(ErrorMsgUtil.ERR_MSG_USER_REGISTERED);
                         }
                     }
                 });

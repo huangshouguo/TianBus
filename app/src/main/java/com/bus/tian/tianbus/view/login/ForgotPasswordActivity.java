@@ -42,7 +42,7 @@ public class ForgotPasswordActivity extends BaseActivity implements IForgotPassw
     EditText editTextPasswordConfirm;
     @BindView(R.id.edit_text_sms_captcha)
     EditText editTextSmsCaptcha;
-    @BindView(R.id.btn_sms_captch_timmer)
+    @BindView(R.id.btn_sms_captcha_timer)
     Button btnSmsCaptchTimmer;
     @BindView(R.id.btn_forgot_password)
     Button btnForgotPassword;
@@ -81,10 +81,10 @@ public class ForgotPasswordActivity extends BaseActivity implements IForgotPassw
 
     }
 
-    @OnClick({R.id.btn_sms_captch_timmer, R.id.btn_forgot_password})
+    @OnClick({R.id.btn_sms_captcha_timer, R.id.btn_forgot_password})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_sms_captch_timmer:
+            case R.id.btn_sms_captcha_timer:
                 sendSmsCaptcha();
                 break;
             case R.id.btn_forgot_password:

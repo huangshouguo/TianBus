@@ -31,7 +31,7 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
     TextView texRemainder;
     @BindView(R.id.edit_text_sms_captcha)
     EditText editTextSmsCaptcha;
-    @BindView(R.id.btn_sms_captch_timmer)
+    @BindView(R.id.btn_sms_captcha_timer)
     Button btnSmsCaptchTimmer;
     @BindView(R.id.edit_text_password)
     EditText editTextPassword;
@@ -94,10 +94,10 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
 
     }
 
-    @OnClick({R.id.btn_sms_captch_timmer, R.id.btn_finish_register})
+    @OnClick({R.id.btn_sms_captcha_timer, R.id.btn_finish_register})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_sms_captch_timmer:
+            case R.id.btn_sms_captcha_timer:
                 sendSmsCaptcha();
                 break;
             case R.id.btn_finish_register:
