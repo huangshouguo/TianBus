@@ -30,12 +30,12 @@ public class ForgotPasswordPresenter extends BasePresenter implements IForgotPas
     @Override
     public void loadSmsCaptcha(String phoneNumber) {
         if (this.view == null) {
-            Log.e(TAG, "findUserByPhoneNumber: view is null");
+            Log.e(TAG, "loadSmsCaptcha: view is null");
             return;
         }
 
         if (!ValidateUtil.validatePhoneNumber(this.view, phoneNumber)) {
-            Log.e(TAG, "findUserByPhoneNumber: input params error, phoneNumber = " + phoneNumber);
+            Log.e(TAG, "loadSmsCaptcha: input params error, phoneNumber = " + phoneNumber);
             return;
         }
 
@@ -56,7 +56,7 @@ public class ForgotPasswordPresenter extends BasePresenter implements IForgotPas
                     @Override
                     public void onNext(UserBean userBean) {
                         super.onNext(userBean);
-                        view.updateSmsCaptchaView();
+                        view.updateSmsCaptchaView(userBean);
                     }
                 });
 
@@ -66,26 +66,26 @@ public class ForgotPasswordPresenter extends BasePresenter implements IForgotPas
     @Override
     public void doResetPassword(String phoneNumber, String pwd, String confirmPwd, String captchaValue, String captchaId) {
         if (this.view == null) {
-            Log.e(TAG, "doRegister: view is null");
+            Log.e(TAG, "doResetPassword: view is null");
             return;
         }
 
         if (!ValidateUtil.validatePhoneNumber(this.view, phoneNumber, false)) {
-            Log.e(TAG, "loadSmsCaptcha: input params error, phoneNumber = " + phoneNumber);
+            Log.e(TAG, "doResetPassword: input params error, phoneNumber = " + phoneNumber);
             return;
         }
         if (!ValidateUtil.validateConfirmPassword(this.view, pwd, confirmPwd)) {
-            Log.e(TAG, "loadSmsCaptcha: input params error, pwd = " + pwd + ", confirmPwd = " + confirmPwd);
+            Log.e(TAG, "doResetPassword: input params error, pwd = " + pwd + ", confirmPwd = " + confirmPwd);
             return;
         }
 
         if (!ValidateUtil.validateSmsCaptchaValue(this.view, captchaValue)) {
-            Log.e(TAG, "loadSmsCaptcha: input params error, captchaValue = " + captchaValue);
+            Log.e(TAG, "doResetPassword: input params error, captchaValue = " + captchaValue);
             return;
         }
 
         if (TextUtils.isEmpty(captchaId)) {
-            Log.e(TAG, "doRegister: input params error, captchaId = " + captchaId);
+            Log.e(TAG, "doResetPassword: input params error, captchaId = " + captchaId);
             return;
         }
 
@@ -104,6 +104,7 @@ public class ForgotPasswordPresenter extends BasePresenter implements IForgotPas
                     public void onNext(UserBean userBean) {
                         super.onNext(userBean);
                         view.updateResetView();
+                        view.showRemainderMessage("您的密码设置成功，请重新登录");
                     }
                 });
 

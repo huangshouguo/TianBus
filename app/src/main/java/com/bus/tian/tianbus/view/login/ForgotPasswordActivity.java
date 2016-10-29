@@ -2,6 +2,8 @@ package com.bus.tian.tianbus.view.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +15,11 @@ import com.bus.tian.tianbus.contract.IForgotPasswordContract;
 import com.bus.tian.tianbus.di.component.DaggerIForgotPasswordComponent;
 import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
 import com.bus.tian.tianbus.di.module.ForgotPasswordModule;
+import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.view.BaseActivity;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -44,6 +50,8 @@ public class ForgotPasswordActivity extends BaseActivity implements IForgotPassw
     @Inject
     IForgotPasswordContract.IPresenter presenter;
 
+    private String strSmsCaptchaId;
+
     @Override
     protected int getContentViewResId() {
         return R.layout.activity_forgot_password;
@@ -61,10 +69,15 @@ public class ForgotPasswordActivity extends BaseActivity implements IForgotPassw
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        this.btnForgotPassword.setEnabled(false);
     }
 
     @Override
     protected void onRelease() {
+        if (presenter != null) {
+            presenter.onRelease();
+            presenter = null;
+        }
 
     }
 
@@ -72,25 +85,85 @@ public class ForgotPasswordActivity extends BaseActivity implements IForgotPassw
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_sms_captch_timmer:
+                sendSmsCaptcha();
                 break;
             case R.id.btn_forgot_password:
+                doResetPassword();
+                break;
+            default:
                 break;
         }
     }
 
     @Override
-    public void updateSmsCaptchaView() {
-
+    public void updateSmsCaptchaView(UserBean userBean) {
+        if (userBean != null) {
+            this.strSmsCaptchaId = userBean.getCaptchaId();
+            this.btnForgotPassword.setEnabled(true);
+            this.textRemainder.setText(getRemainderMessage());
+            startTimer();
+        }
     }
 
     @Override
     public void updateResetView() {
-
+        finish();
     }
 
     public static void actionStart(Context context, final String phoneNumber) {
         Intent intent = new Intent(context, ForgotPasswordActivity.class);
         intent.putExtra(PHONE_NUMBER_TAG, phoneNumber);
         context.startActivity(intent);
+    }
+
+    private void startTimer() {
+        this.btnSmsCaptchTimmer.setEnabled(false);
+
+        Timer timer = new Timer();
+        Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                int time = msg.arg1;
+                btnSmsCaptchTimmer.setText(String.valueOf(time) + "s");
+                if (time <= 0) {
+                    timer.cancel();
+                    btnSmsCaptchTimmer.setText(R.string.text_resent_onclick);
+                    btnSmsCaptchTimmer.setEnabled(true);
+                }
+            }
+        };
+
+        TimerTask task = new TimerTask() {
+            int time = 60;
+
+            @Override
+            public void run() {
+                Message message = new Message();
+                message.arg1 = time--;
+                handler.sendMessage(message);
+            }
+        };
+
+        timer.schedule(task, 1000, 1000);
+    }
+
+    private void sendSmsCaptcha() {
+        if (this.presenter != null) {
+            this.presenter.loadSmsCaptcha(this.editTextPhoneNumber.getText().toString());
+        }
+    }
+
+    private String getRemainderMessage() {
+        return "短信验证码已经发送至您的手机：" + this.editTextPhoneNumber.getText().toString() + "，请注意查收并完成密码的设置。";
+    }
+
+    private void doResetPassword() {
+        if (this.presenter != null) {
+            this.presenter.doResetPassword(this.editTextPhoneNumber.getText().toString(),
+                    this.editTextPassword.getText().toString(),
+                    this.editTextPasswordConfirm.getText().toString(),
+                    this.editTextSmsCaptcha.getText().toString(),
+                    this.strSmsCaptchaId);
+        }
     }
 }

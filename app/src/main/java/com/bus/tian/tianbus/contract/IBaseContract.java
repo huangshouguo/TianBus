@@ -13,6 +13,8 @@ public interface IBaseContract {
         //rx subscription can be unsubscribed automatically
         <T> LifecycleTransformer<T> doBindToLifecycle();
 
+        void showRemainderMessage(final String remainderMsg);
+
         void showErrorMessage(final String errorMsg);
 
         Observer<String> showProgress(final String loadingMessage, final boolean shouldHideProgressDialog);

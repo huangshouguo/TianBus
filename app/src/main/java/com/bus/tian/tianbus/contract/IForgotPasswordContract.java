@@ -1,5 +1,7 @@
 package com.bus.tian.tianbus.contract;
 
+import com.bus.tian.tianbus.model.bean.UserBean;
+
 /**
  * Created by hsg on 10/28/16.
  */
@@ -7,7 +9,7 @@ package com.bus.tian.tianbus.contract;
 public interface IForgotPasswordContract {
 
     interface IView extends IBaseContract.IBaseView {
-        void updateSmsCaptchaView();
+        void updateSmsCaptchaView(UserBean userBean);
 
         void updateResetView();
     }

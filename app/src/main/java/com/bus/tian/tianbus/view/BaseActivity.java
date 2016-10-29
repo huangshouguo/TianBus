@@ -86,6 +86,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseCon
     }
 
     @Override
+    public void showRemainderMessage(String remainderMsg) {
+        Log.d(TAG, "showRemainderMessage() called with: remainderMsg = [" + remainderMsg + "]");
+
+        // TODO: 2016/10/29 wrapper show message func
+        Toast.makeText(this, remainderMsg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showErrorMessage(String errorMsg) {
         Log.e(TAG, "showErrorMessage: errorMsg = " + errorMsg);
 
