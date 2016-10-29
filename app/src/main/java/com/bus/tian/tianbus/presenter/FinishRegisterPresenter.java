@@ -7,6 +7,7 @@ import com.bus.tian.tianbus.contract.IFinishRegisterContract;
 import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.ApiRspSubscriber;
+import com.bus.tian.tianbus.util.UserManager;
 import com.bus.tian.tianbus.util.ValidateUtil;
 
 import rx.Observable;
@@ -98,6 +99,7 @@ public class FinishRegisterPresenter extends BasePresenter implements IFinishReg
                     public void onNext(UserBean userBean) {
                         super.onNext(userBean);
                         view.updateRegisterView(userBean);
+                        UserManager.getInstance().handleLoginSuccess(userBean);
                     }
                 });
 

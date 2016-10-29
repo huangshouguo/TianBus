@@ -8,6 +8,7 @@ import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.ApiRspSubscriber;
 import com.bus.tian.tianbus.util.ErrorMsgUtil;
+import com.bus.tian.tianbus.util.UserManager;
 import com.bus.tian.tianbus.util.ValidateUtil;
 
 import javax.inject.Inject;
@@ -60,6 +61,8 @@ public class LoginPresenter extends BasePresenter implements ILoginContract.IPre
                     @Override
                     public void onNext(UserBean userBean) {
                         super.onNext(userBean);
+                        view.updateLoginView(userBean);
+                        UserManager.getInstance().handleLoginSuccess(userBean);
                     }
                 });
 

@@ -6,6 +6,7 @@ import com.bus.tian.tianbus.model.api.ApiResponseCode;
 import com.bus.tian.tianbus.model.api.IApi;
 import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.util.ErrorMsgUtil;
+import com.bus.tian.tianbus.util.UserManager;
 
 import javax.inject.Inject;
 
@@ -85,6 +86,11 @@ public class BasePresenter implements IBaseContract.IBasePresenter {
                         if (tApiResponseBean != null) {
                             if (tApiResponseBean.getCode() == ApiResponseCode.API_RSP_CODE_SUCCEED) {
                                 return createData(tApiResponseBean.getData());
+                            }
+                            switch (tApiResponseBean.getCode()){
+                                case ApiResponseCode.API_RSP_CODE_TOKEN_INVALID:
+                                    UserManager.getInstance().handleTokenInvalid();
+                                    break;
                             }
                             return Observable.error(new Throwable(tApiResponseBean.getMsg()));
                         }
