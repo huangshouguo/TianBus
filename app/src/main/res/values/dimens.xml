@@ -10,7 +10,7 @@
     <dimen name="separator_line_width">0.5dp</dimen>
 
     <!-- font size -->
-    <dimen name="nav_header_text_font_size">14sp</dimen>
+    <dimen name="nav_header_text_font_size">16sp</dimen>
     <dimen name="input_text_font_size">14sp</dimen>
     <dimen name="button_text_font_size">20sp</dimen>
     <dimen name="button_white_text_font_size">14sp</dimen>

@@ -1,22 +1,34 @@
 package com.bus.tian.tianbus.view;
 
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bus.tian.tianbus.R;
+import com.bus.tian.tianbus.contract.IMainContract;
+import com.bus.tian.tianbus.di.component.DaggerIMainComponent;
+import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
+import com.bus.tian.tianbus.di.module.MainModule;
+import com.bus.tian.tianbus.model.bean.UserBean;
+import com.bus.tian.tianbus.util.UserManager;
 import com.bus.tian.tianbus.view.login.LoginActivity;
 
+import javax.inject.Inject;
+
+import butterknife.BindDrawable;
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements IMainContract.IView {
 
     @BindView(R.id.tool_bar_main)
     Toolbar toolBar;
@@ -26,6 +38,18 @@ public class MainActivity extends BaseActivity {
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindString(R.string.app_name)
+    String strAppName;
+
+    @Inject
+    IMainContract.IPresenter presenter;
+
+    private HeaderHolder headerHolder;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     protected int getContentViewResId() {
@@ -34,7 +58,15 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        DaggerIMainComponent.builder()
+                .iNetCompoent(DaggerINetCompoent.create())
+                .mainModule(new MainModule(this))
+                .build()
+                .inject(this);
 
+        if (this.presenter != null) {
+            this.presenter.initRxEvent();
+        }
     }
 
     @Override
@@ -46,13 +78,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onRelease() {
-
+        if (this.presenter != null) {
+            this.presenter.onRelease();
+            this.presenter = null;
+        }
     }
 
     private void initToolBar() {
         setSupportActionBar(this.toolBar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("test");
+        actionBar.setTitle(strAppName);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_nav);
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -60,14 +95,13 @@ public class MainActivity extends BaseActivity {
     private void initDrawerNav() {
         this.drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         setupDrawerContent(this.navigationView);
-        this.navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick: onclick header");
-                startLogin();
-            }
-        });
+        View header = this.navigationView.getHeaderView(0);
+        if (header != null) {
+            this.headerHolder = new HeaderHolder(header);
+            header.setOnClickListener(v -> startLoginActivity());
+        }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,13 +128,58 @@ public class MainActivity extends BaseActivity {
 
                 // Close the navigation drawer when an item is selected.
                 item.setCheckable(true);
-//                drawerLayout.closeDrawers();
+                drawerLayout.closeDrawers();
                 return true;
             });
         }
     }
 
-    private void startLogin(){
+    @Override
+    public void startLoginActivity() {
         LoginActivity.actionStart(context);
+    }
+
+    @Override
+    public void updateViewOnLogin() {
+        if (this.headerHolder != null) {
+            this.headerHolder.updateHeaderViewOnLogin();
+        }
+    }
+
+    @Override
+    public void updateViewOnLogout() {
+        if (this.headerHolder != null) {
+            this.headerHolder.updateHeaderViewOnLogout();
+        }
+    }
+
+    static class HeaderHolder {
+        @BindView(R.id.image_nav_header)
+        ImageView imgHeader;
+        @BindView(R.id.text_nav_header)
+        TextView textTitle;
+        @BindDrawable(R.drawable.logo)
+        Drawable drawableLogo;
+        @BindDrawable(R.drawable.user)
+        Drawable drawableUser;
+        @BindString(R.string.text_login_onclick)
+        String textLoginOnClick;
+
+        public HeaderHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+
+        public void updateHeaderViewOnLogin() {
+            UserBean userBean = UserManager.getInstance().getUserOfLogined();
+            if (userBean != null) {
+                this.textTitle.setText(userBean.getPhone());
+                this.imgHeader.setImageDrawable(drawableUser);
+            }
+        }
+
+        public void updateHeaderViewOnLogout() {
+            this.textTitle.setText(textLoginOnClick);
+            this.imgHeader.setImageDrawable(drawableLogo);
+        }
     }
 }
