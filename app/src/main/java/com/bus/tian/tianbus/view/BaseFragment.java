@@ -105,6 +105,13 @@ public abstract class BaseFragment extends Fragment implements IBaseContract.IBa
     }
 
     @Override
+    public void showRemainderMessage(String remainderMsg) {
+        if (this.baseActivity != null) {
+            this.baseActivity.showRemainderMessage(remainderMsg);
+        }
+    }
+
+    @Override
     public void showErrorMessage(String errorMsg) {
         if (this.baseActivity != null) {
             this.baseActivity.showErrorMessage(errorMsg);
