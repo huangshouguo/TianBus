@@ -8,6 +8,7 @@ public interface IMainContract {
     interface IView extends IBaseContract.IBaseView {
         void startLoginActivity();
         void updateViewOnLogin();
+        void updateViewOnCancelLogin();
         void updateViewOnLogout();
     }
 

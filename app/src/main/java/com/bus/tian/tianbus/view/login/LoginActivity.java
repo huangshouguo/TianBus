@@ -32,9 +32,16 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
     Button btnRegister;
     @BindView(R.id.btn_login_forgot)
     Button btnForgot;
-
     @Inject
     ILoginContract.IPresenter loginPresenter;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (this.loginPresenter != null){
+            this.loginPresenter.cancelLogin();
+        }
+    }
 
     @Override
     protected int getContentViewResId() {

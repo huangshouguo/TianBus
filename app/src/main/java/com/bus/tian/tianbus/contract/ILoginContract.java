@@ -14,5 +14,7 @@ public interface ILoginContract {
 
     interface IPresenter extends IBaseContract.IBasePresenter{
         void login(final String phoneNumber, final String password);
+
+        void cancelLogin();
     }
 }

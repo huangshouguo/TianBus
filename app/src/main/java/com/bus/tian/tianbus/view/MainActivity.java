@@ -2,6 +2,8 @@ package com.bus.tian.tianbus.view;
 
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -19,7 +21,10 @@ import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
 import com.bus.tian.tianbus.di.module.MainModule;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.UserManager;
+import com.bus.tian.tianbus.view.help.HelpFragment;
+import com.bus.tian.tianbus.view.home.HomeFragment;
 import com.bus.tian.tianbus.view.login.LoginActivity;
+import com.bus.tian.tianbus.view.me.MeFragment;
 
 import javax.inject.Inject;
 
@@ -44,6 +49,10 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
     IMainContract.IPresenter presenter;
 
     private HeaderHolder headerHolder;
+    private BaseFragment preFragment;
+    private HomeFragment homeFragment;
+    private HelpFragment helpFragment;
+    private MeFragment meFragment;
 
     @Override
     protected int getContentViewResId() {
@@ -68,6 +77,7 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         ButterKnife.bind(this);
         initToolBar();
         initDrawerNav();
+        showHomeFragment();
     }
 
     @Override
@@ -92,10 +102,19 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         View header = this.navigationView.getHeaderView(0);
         if (header != null) {
             this.headerHolder = new HeaderHolder(header);
-            header.setOnClickListener(v -> startLoginActivity());
+            header.setOnClickListener(v -> {
+                if (!UserManager.getInstance().isLogined()) {
+                    startLoginActivity();
+                }
+            });
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.drawerLayout.closeDrawers();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -113,17 +132,21 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
             navigationView.setNavigationItemSelectedListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.menu_home:
+                        showHomeFragment();
                         break;
                     case R.id.menu_help:
+                        showHelpFragment();
+                        break;
+                    case R.id.menu_me:
+                        showMeFragment();
                         break;
                     default:
                         break;
                 }
 
                 // Close the navigation drawer when an item is selected.
-                item.setCheckable(true);
                 drawerLayout.closeDrawers();
-                return true;
+                return false;
             });
         }
     }
@@ -138,6 +161,13 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         if (this.headerHolder != null) {
             this.headerHolder.updateHeaderViewOnLogin();
         }
+
+        showMeFragment();
+    }
+
+    @Override
+    public void updateViewOnCancelLogin() {
+        showHomeFragment();
     }
 
     @Override
@@ -145,6 +175,64 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         if (this.headerHolder != null) {
             this.headerHolder.updateHeaderViewOnLogout();
         }
+
+        showHomeFragment();
+    }
+
+    private void showHomeFragment() {
+        if (this.homeFragment == null) {
+            this.homeFragment = new HomeFragment();
+        }
+
+        updateFragment(this.homeFragment, this.preFragment);
+        this.navigationView.setCheckedItem(R.id.menu_home);
+    }
+
+    private void showHelpFragment() {
+        if (this.helpFragment == null) {
+            this.helpFragment = new HelpFragment();
+        }
+
+        updateFragment(this.helpFragment, this.preFragment);
+        this.navigationView.setCheckedItem(R.id.menu_help);
+    }
+
+    private void showMeFragment() {
+        if (!UserManager.getInstance().isLogined()) {
+            startLoginActivity();
+            return;
+        }
+        if (this.meFragment == null) {
+            this.meFragment = new MeFragment();
+        }
+
+        updateFragment(this.meFragment, this.preFragment);
+        this.navigationView.setCheckedItem(R.id.menu_me);
+    }
+
+
+    private void updateFragment(final BaseFragment newFragment, BaseFragment oldFragment) {
+        //1. check null
+        if (newFragment == null) {
+            return;
+        }
+
+        //2. check the same fragment
+        if (newFragment == oldFragment) {
+            return;
+        }
+
+        //3. update
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (oldFragment != null) {
+            fragmentTransaction.remove(oldFragment);
+        }
+        fragmentTransaction.replace(R.id.layout_content_main, newFragment);
+        fragmentTransaction.commitAllowingStateLoss();
+
+        //4. record selection
+        oldFragment = newFragment;
     }
 
     static class HeaderHolder {

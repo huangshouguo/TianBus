@@ -15,11 +15,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme" parent="Base.AppTheme" />
+    <style name="AppTheme" parent="Base.AppTheme"/>
 
-    <style name="AppTheme.OverlabSystemBar" parent="Base.AppTheme" />
+    <style name="AppTheme.OverlabSystemBar" parent="Base.AppTheme"/>
 
-    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="ButtonTheme.Radius" parent="AppTheme">
         <item name="android:layout_width">match_parent</item>
@@ -72,5 +72,29 @@
         <item name="android:layout_margin">@dimen/default_left_gap</item>
         <item name="android:textSize">@dimen/ft14</item>
         <item name="android:textColor">@color/colorTextRemainder</item>
+    </style>
+
+    <style name="IconTextVerticalStyle" parent="AppTheme">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">@dimen/ft10</item>
+        <item name="android:textColor">@color/colorTitleText</item>
+    </style>
+
+    <style name="ItemTitleStyle" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/default_left_gap</item>
+        <item name="android:paddingRight">@dimen/default_right_gap</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:background">@color/colorBackgroundDark</item>
+        <item name="android:textSize">@dimen/ft16</item>
+        <item name="android:textColor">@color/colorTitleText</item>
     </style>
 </resources>

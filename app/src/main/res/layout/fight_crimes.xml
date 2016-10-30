@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:showIn="@layout/fragment_home">
+
+    <!--cop 110-->
+    <Button
+        style="@style/IconTextVerticalStyle"
+        android:drawableTop="@drawable/ic_cop_110"
+        android:text="@string/text_call_cop"/>
+
+    <!--cop local-->
+    <Button
+        style="@style/IconTextVerticalStyle"
+        android:drawableTop="@drawable/ic_cop_local"
+        android:text="@string/text_call_cop_local"/>
+
+    <!--capture photo-->
+    <Button
+        style="@style/IconTextVerticalStyle"
+        android:drawableTop="@drawable/ic_camera"
+        android:text="@string/text_capture_photo"/>
+
+    <!--capture video-->
+    <Button
+        style="@style/IconTextVerticalStyle"
+        android:drawableTop="@drawable/ic_videocam"
+        android:text="@string/text_capture_video"/>
+</LinearLayout>

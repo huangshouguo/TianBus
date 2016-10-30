@@ -91,7 +91,9 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
 
     @Override
     public void updateRegisterView(UserBean userBean) {
-
+        if(this.registerActivity != null){
+            this.registerActivity.finish();
+        }
     }
 
     @OnClick({R.id.btn_sms_captcha_timer, R.id.btn_finish_register})
@@ -102,6 +104,8 @@ public class FinishRegisterFragment extends BaseFragment implements IFinishRegis
                 break;
             case R.id.btn_finish_register:
                 doRegister();
+                break;
+            default:
                 break;
         }
     }

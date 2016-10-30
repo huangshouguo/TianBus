@@ -89,7 +89,7 @@ public class ForgotPasswordPresenter extends BasePresenter implements IForgotPas
             return;
         }
 
-        Subscription subscription = getApi().resetPassword(phoneNumber, pwd, captchaValue, captchaId)
+        Subscription subscription = getApi().forgotPassword(phoneNumber, pwd, captchaValue, captchaId)
                 .compose(preHandleApiResponse())
                 .flatMap(new Func1<UserBean, Observable<ApiResponseBean<UserBean>>>() {
                     @Override

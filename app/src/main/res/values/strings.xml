@@ -16,6 +16,14 @@
     <string name="text_home">首页</string>
     <string name="text_query">查询</string>
     <string name="text_me">我的</string>
+
+    <string name="text_call_cop">一键拨打110</string>
+    <string name="text_call_cop_local">一键联系片警</string>
+    <string name="text_capture_photo">拍摄警情图片</string>
+    <string name="text_capture_video">拍摄警情视频</string>
+    <string name="text_cop_announcement">警务公告</string>
+    <string name="text_message_board">警务交流</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

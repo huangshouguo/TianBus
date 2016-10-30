@@ -6,8 +6,11 @@ import com.bus.tian.tianbus.contract.ILoginContract;
 import com.bus.tian.tianbus.model.api.ApiResponseCode;
 import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.model.bean.UserBean;
+import com.bus.tian.tianbus.model.event.EventType;
+import com.bus.tian.tianbus.model.event.UserLoginEvent;
 import com.bus.tian.tianbus.util.ApiRspSubscriber;
 import com.bus.tian.tianbus.util.ErrorMsgUtil;
+import com.bus.tian.tianbus.util.RxBusUtil;
 import com.bus.tian.tianbus.util.UserManager;
 import com.bus.tian.tianbus.util.ValidateUtil;
 
@@ -67,5 +70,12 @@ public class LoginPresenter extends BasePresenter implements ILoginContract.IPre
                 });
 
         addSubscription(subscription);
+    }
+
+    @Override
+    public void cancelLogin() {
+        if (RxBusUtil.getDefaultInstance().hasObservers()) {
+            RxBusUtil.getDefaultInstance().send(new UserLoginEvent(EventType.EVENT_TYPE_LOGIN_CANCEL));
+        }
     }
 }

@@ -63,7 +63,7 @@ public class MainPresenter extends BasePresenter implements IMainContract.IPrese
             return;
         }
 
-        this.view.updateViewOnLogin();
+        this.view.updateViewOnCancelLogin();
     }
 
     private void onTokenInvalid() {

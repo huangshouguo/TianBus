@@ -1,0 +1,55 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorBackground">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--banner-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/cardview_dark_background"/>
+
+            <!--打击犯罪-->
+            <include layout="@layout/fight_crimes"/>
+
+            <!--警务公告-->
+            <TextView
+                style="@style/ItemTitleStyle"
+                android:text="@string/text_cop_announcement"/>
+
+            <!--警务公告内容-->
+            <ListView
+                android:id="@+id/list_view_cop_announcement"
+                android:divider="@color/colorSeparatorLine"
+                android:dividerHeight="@dimen/separator_line_width"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+            </ListView>
+
+            <!--警务交流-->
+            <TextView
+                style="@style/ItemTitleStyle"
+                android:text="@string/text_message_board"/>
+
+            <!--警务交流内容-->
+            <ListView
+                android:id="@+id/list_view_message_board"
+                android:divider="@color/colorSeparatorLine"
+                android:dividerHeight="@dimen/separator_line_width"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

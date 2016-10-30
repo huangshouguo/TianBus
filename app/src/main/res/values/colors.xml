@@ -17,8 +17,10 @@
     <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundDark">#FFF8F8F8</color>
     <color name="colorIcon">#FFCCCCCC</color>
+    <color name="colorIconLight">#FF005CAF</color>
     <color name="colorIconChecked">#FFFFFFFF</color>
     <color name="colorInputText">#FF313131</color>
+    <color name="colorTitleText">#FF313131</color>
     <color name="colorInputHintText">#FFCCCCCC</color>
     <color name="colorSeparatorLine">#FFDCDCDC</color>
     <color name="colorBtnWarnningNormal">#FFFF0000</color>

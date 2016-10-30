@@ -14,6 +14,8 @@ import rx.Observable;
 
 public interface IApi {
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // 注册相关Api
     @FormUrlEncoded
     @POST("checkphone")
     Observable<ApiResponseBean<UserBean>> findUserByPhoneNumber(
@@ -33,8 +35,8 @@ public interface IApi {
             @Field("captchaId") String captchaId);
 
     @FormUrlEncoded
-    @POST("resetpassword")
-    Observable<ApiResponseBean<UserBean>> resetPassword(
+    @POST("forgotpassword")
+    Observable<ApiResponseBean<UserBean>> forgotPassword(
             @Field("phone") String phone,
             @Field("password") String password,
             @Field("captcha") String captchaValue,
@@ -45,4 +47,19 @@ public interface IApi {
     Observable<ApiResponseBean<UserBean>> login(
             @Field("phone") String phone,
             @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("resetpassword")
+    Observable<ApiResponseBean<UserBean>> resetPassword(
+            @Field("uid") String uid,
+            @Field("oldPassword") String oldPassword,
+            @Field("newPassword") String newPassword);
+
+    @FormUrlEncoded
+    @POST("logout")
+    Observable<ApiResponseBean<UserBean>> logout(
+            @Field("uid") String uid);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // 注册相关Api
 }
