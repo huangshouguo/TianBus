@@ -186,7 +186,6 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
 
         updateFragment(this.homeFragment, this.preFragment);
         this.navigationView.setCheckedItem(R.id.menu_home);
-        this.homeFragment.preShowAction();
     }
 
     private void showHelpFragment() {
