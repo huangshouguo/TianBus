@@ -4,6 +4,7 @@
              android:background="@color/colorBackground">
 
     <ScrollView
+        android:id="@+id/scroll_view_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -27,14 +28,14 @@
                 android:text="@string/text_cop_announcement"/>
 
             <!--警务公告内容-->
-            <ListView
+            <com.bus.tian.tianbus.view.custom.ListviewForScrollView
                 android:id="@+id/list_view_cop_announcement"
                 android:divider="@color/colorSeparatorLine"
                 android:dividerHeight="@dimen/separator_line_width"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="0dp">
-            </ListView>
+            </com.bus.tian.tianbus.view.custom.ListviewForScrollView>
 
             <!--警务交流-->
             <TextView
@@ -47,8 +48,7 @@
                 android:divider="@color/colorSeparatorLine"
                 android:dividerHeight="@dimen/separator_line_width"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="0dp">
+                android:layout_height="10dp">
             </ListView>
         </LinearLayout>
     </ScrollView>

@@ -6,4 +6,8 @@ package com.bus.tian.tianbus.model.bean;
 
 public class DummyBean extends BaseBean {
 
+    @Override
+    String getKey() {
+        return null;
+    }
 }

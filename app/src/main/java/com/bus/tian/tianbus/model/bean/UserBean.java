@@ -51,4 +51,9 @@ public class UserBean extends BaseBean {
                 ", captchaId='" + captchaId + '\'' +
                 '}';
     }
+
+    @Override
+    String getKey() {
+        return getPhone();
+    }
 }

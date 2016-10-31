@@ -9,24 +9,28 @@
 
     <!--cop 110-->
     <Button
+        android:id="@+id/btn_cop_110"
         style="@style/IconTextVerticalStyle"
         android:drawableTop="@drawable/ic_cop_110"
         android:text="@string/text_call_cop"/>
 
     <!--cop local-->
     <Button
+        android:id="@+id/btn_cop_local"
         style="@style/IconTextVerticalStyle"
         android:drawableTop="@drawable/ic_cop_local"
         android:text="@string/text_call_cop_local"/>
 
     <!--capture photo-->
     <Button
+        android:id="@+id/btn_capture_photo"
         style="@style/IconTextVerticalStyle"
         android:drawableTop="@drawable/ic_camera"
         android:text="@string/text_capture_photo"/>
 
     <!--capture video-->
     <Button
+        android:id="@+id/btn_capture_video"
         style="@style/IconTextVerticalStyle"
         android:drawableTop="@drawable/ic_videocam"
         android:text="@string/text_capture_video"/>
