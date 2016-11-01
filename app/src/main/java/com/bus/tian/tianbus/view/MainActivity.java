@@ -1,6 +1,8 @@
 package com.bus.tian.tianbus.view;
 
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -8,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -47,6 +50,10 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
     String strAppName;
     @Inject
     IMainContract.IPresenter presenter;
+    @BindView(R.id.fab_main)
+    FloatingActionButton fabMain;
+    @BindView(R.id.coordinator_main)
+    CoordinatorLayout coordinatorMain;
 
     private HeaderHolder headerHolder;
     private BaseFragment preFragment;
@@ -77,7 +84,16 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         ButterKnife.bind(this);
         initToolBar();
         initDrawerNav();
+        initFloatActionBar();
         showHomeFragment();
+    }
+
+    private void initFloatActionBar(){
+        this.fabMain.setOnClickListener(v -> showForum());
+    }
+
+    private void showForum(){
+        Log.i(TAG, "showForum: ");
     }
 
     @Override
