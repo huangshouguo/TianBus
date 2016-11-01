@@ -10,7 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,6 +24,7 @@ import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
 import com.bus.tian.tianbus.di.module.MainModule;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.UserManager;
+import com.bus.tian.tianbus.view.forum.ForumActivity;
 import com.bus.tian.tianbus.view.help.HelpFragment;
 import com.bus.tian.tianbus.view.home.HomeFragment;
 import com.bus.tian.tianbus.view.login.LoginActivity;
@@ -93,7 +94,7 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
     }
 
     private void showForum(){
-        Log.i(TAG, "showForum: ");
+        ForumActivity.actionStart(this);
     }
 
     @Override
@@ -202,6 +203,7 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
 
         updateFragment(this.homeFragment, this.preFragment);
         this.navigationView.setCheckedItem(R.id.menu_home);
+        this.updateActionBarTitle(getString(R.string.text_home));
     }
 
     private void showHelpFragment() {
@@ -211,6 +213,7 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
 
         updateFragment(this.helpFragment, this.preFragment);
         this.navigationView.setCheckedItem(R.id.menu_help);
+        this.updateActionBarTitle(getString(R.string.text_query));
     }
 
     private void showMeFragment() {
@@ -224,8 +227,14 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
 
         updateFragment(this.meFragment, this.preFragment);
         this.navigationView.setCheckedItem(R.id.menu_me);
+        updateActionBarTitle(getString(R.string.text_me));
     }
 
+    private void updateActionBarTitle(final String title){
+        if (!TextUtils.isEmpty(title)) {
+            getSupportActionBar().setTitle(title);
+        }
+    }
 
     private void updateFragment(final BaseFragment newFragment, BaseFragment oldFragment) {
         //1. check null

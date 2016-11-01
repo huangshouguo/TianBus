@@ -33,6 +33,8 @@
         <activity android:name=".view.login.ForgotPasswordActivity"/>
         <activity android:name=".view.home.AnnouncementDetailActivity">
         </activity>
+        <activity android:name=".view.forum.ForumActivity">
+        </activity>
     </application>
 
 </manifest>
