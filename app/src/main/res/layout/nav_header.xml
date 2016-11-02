@@ -5,22 +5,23 @@
     android:layout_height="@dimen/nav_header_height"
     android:background="@color/colorPrimary"
     android:gravity="bottom"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:id="@+id/image_nav_header"
         android:layout_width="@dimen/nav_header_img_size"
         android:layout_height="@dimen/nav_header_img_size"
         android:layout_gravity="center"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/text_nav_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
+        android:paddingBottom="@dimen/default_left_gap"
         android:text="@string/text_login_onclick"
         android:textColor="@color/colorWhite"
-        android:paddingBottom="@dimen/default_left_gap"
-        android:textSize="@dimen/nav_header_text_font_size"/>
+        android:textSize="@dimen/nav_header_text_font_size" />
 </FrameLayout>
