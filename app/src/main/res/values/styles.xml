@@ -97,4 +97,29 @@
         <item name="android:textSize">@dimen/ft16</item>
         <item name="android:textColor">@color/colorTitleText</item>
     </style>
+
+    <style name="ButtonTheme.Next" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:paddingLeft">@dimen/default_left_gap</item>
+        <item name="android:paddingRight">@dimen/default_right_gap</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:drawableRight">@drawable/ic_next</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:textColor">@color/colorContentText</item>
+        <item name="android:textSize">@dimen/ft14</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ListViewTheme" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:divider">@color/colorSeparatorLine</item>
+        <item name="android:dividerHeight">@dimen/separator_line_width</item>
+    </style>
 </resources>
