@@ -1,14 +1,23 @@
 package com.bus.tian.tianbus.view.help;
 
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
 import com.bus.tian.tianbus.R;
-import com.bus.tian.tianbus.model.bean.TextLinkBean;
+import com.bus.tian.tianbus.contract.IHelpBizContract;
+import com.bus.tian.tianbus.di.component.DaggerIHelpBizComponent;
+import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
+import com.bus.tian.tianbus.di.module.HelpBizModule;
+import com.bus.tian.tianbus.model.bean.HelpBizBean;
 import com.bus.tian.tianbus.view.BaseFragment;
-import com.bus.tian.tianbus.view.common.SingleTextAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,19 +26,31 @@ import butterknife.ButterKnife;
  * Created by hsg on 11/2/16.
  */
 
-public class BusinessFragment extends BaseFragment {
+public class BusinessFragment extends BaseFragment implements IHelpBizContract.IView {
 
-    @BindView(R.id.list_view_tab_business)
-    ListView listView;
+    @BindView(R.id.recycler_view_tab_business)
+    RecyclerView recyclerView;
 
-    private SingleTextAdapter adapter;
-    private List<TextLinkBean> dataList;
+    @Inject
+    IHelpBizContract.IPresenter presenter;
+
+    private List<HelpBizBean> dataList;
+    private BusinessAdapter adapter;
 
     public BusinessFragment() {
     }
 
     public static BusinessFragment getInstance() {
         return new BusinessFragment();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (this.presenter != null) {
+            this.presenter.loadData();
+        }
     }
 
     @Override
@@ -39,39 +60,41 @@ public class BusinessFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
+        DaggerIHelpBizComponent.builder()
+                .iNetCompoent(DaggerINetCompoent.create())
+                .helpBizModule(new HelpBizModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override
     protected void initView() {
         ButterKnife.bind(this, rootView);
-
-        this.dataList = new ArrayList<>();
-        dataFactory();
-        this.adapter = new SingleTextAdapter(baseActivity, R.layout.text_next_item, this.dataList);
-        this.listView.setAdapter(this.adapter);
     }
 
     @Override
     protected void onRelease() {
+        if (presenter != null) {
+            presenter.onRelease();
+            presenter = null;
+        }
     }
 
-    private void dataFactory(){
-        TextLinkBean lawMaster = new TextLinkBean();
-        lawMaster.setText("中华人民共和国宪法");
-        TextLinkBean lawCriminal = new TextLinkBean();
-        lawCriminal.setText("中华人民共和国刑法");
-        TextLinkBean lawTraffic = new TextLinkBean();
-        lawTraffic.setText("中华人民共和国道路交通安全法");
-        TextLinkBean lawSecurity = new TextLinkBean();
-        lawSecurity.setText("中华人民共和国治安管理处罚法");
-
-        if (this.dataList != null){
+    @Override
+    public void updateView(List<HelpBizBean> helpBizBeanList) {
+        if (this.dataList != null) {
             this.dataList.clear();
-            this.dataList.add(lawMaster);
-            this.dataList.add(lawCriminal);
-            this.dataList.add(lawTraffic);
-            this.dataList.add(lawSecurity);
         }
+        this.dataList = helpBizBeanList;
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(baseActivity));
+        this.adapter = new BusinessAdapter(R.layout.list_section_item, R.layout.list_section_header, this.dataList);
+        this.recyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
+                Log.e(TAG, "SimpleOnItemClick: i = " + i);
+            }
+        });
+
+        this.recyclerView.setAdapter(this.adapter);
     }
 }
