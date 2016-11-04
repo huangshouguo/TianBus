@@ -117,9 +117,9 @@
 
     <style name="ListViewTheme" parent="AppTheme">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/colorBackground</item>
         <item name="android:divider">@color/colorSeparatorLine</item>
-        <item name="android:dividerHeight">@dimen/separator_line_width</item>
+        <item name="android:dividerHeight">0.5dp</item>
     </style>
 </resources>

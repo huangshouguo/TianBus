@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.bus.tian.tianbus.R;
 import com.bus.tian.tianbus.model.bean.TextLinkBean;
@@ -47,15 +47,15 @@ public class SingleTextAdapter extends ArrayAdapter<TextLinkBean> {
         }
 
         if (textLinkBean != null) {
-            viewHolder.button.setText(textLinkBean.getText());
+            viewHolder.textView.setText(textLinkBean.getText());
         }
 
         return view;
     }
 
     static class ViewHolder {
-        @BindView(R.id.btn_next_item)
-        Button button;
+        @BindView(R.id.text_next_item)
+        TextView textView;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
