@@ -30,7 +30,6 @@ public class BusinessFragment extends BaseFragment implements IHelpBizContract.I
 
     @BindView(R.id.recycler_view_tab_business)
     RecyclerView recyclerView;
-
     @Inject
     IHelpBizContract.IPresenter presenter;
 
@@ -43,7 +42,6 @@ public class BusinessFragment extends BaseFragment implements IHelpBizContract.I
     public static BusinessFragment getInstance() {
         return new BusinessFragment();
     }
-
 
     @Override
     public void onResume() {
@@ -91,7 +89,19 @@ public class BusinessFragment extends BaseFragment implements IHelpBizContract.I
         this.recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                Log.e(TAG, "SimpleOnItemClick: i = " + i);
+                HelpBizBean helpBizBean = dataList.get(i);
+                if (helpBizBean != null) {
+                    if (helpBizBean.isHeader) {
+                        Log.e(TAG, "SimpleOnItemClick: header i = " + i);
+                    } else {
+                        BizDetailActivity.actionStart(baseActivity, helpBizBean.t);
+                    }
+                }
+            }
+
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                Log.e(TAG, "onItemChildClick: postion = " + position);
             }
         });
 

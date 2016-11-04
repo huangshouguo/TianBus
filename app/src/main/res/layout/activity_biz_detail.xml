@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_biz_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_title_biz_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:paddingLeft="@dimen/default_left_gap"
+        android:paddingRight="@dimen/default_right_gap"
+        android:paddingTop="20dp"
+        android:text="dsfjj"
+        android:textColor="@color/colorContentTitle"
+        android:textSize="@dimen/ft16" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/text_content_biz_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/default_left_gap"
+            android:paddingRight="@dimen/default_right_gap" />
+    </ScrollView>
+</LinearLayout>
