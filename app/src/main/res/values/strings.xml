@@ -24,6 +24,8 @@
     <string name="text_cop_announcement">警务公告</string>
     <string name="text_cop_announcement_detail">警务公告详情</string>
     <string name="text_message_board">警务交流</string>
+    <string name="text_message_board_detail">警务交流详情</string>
+    <string name="text_message_board_create">创建交流主题</string>
 
     <string name="text_tab_law">法律法规</string>
     <string name="text_tab_business">办事流程</string>

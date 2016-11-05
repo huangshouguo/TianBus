@@ -8,6 +8,7 @@
     <dimen name="icon_content_padding">15dp</dimen>
     <dimen name="button_radius">6dp</dimen>
     <dimen name="separator_line_width">0.5dp</dimen>
+    <dimen name="banner_height">200dp</dimen>
 
     <!-- font size -->
     <dimen name="nav_header_text_font_size">16sp</dimen>

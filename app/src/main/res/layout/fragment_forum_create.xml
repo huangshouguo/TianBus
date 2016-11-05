@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_forum_create"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:paddingLeft="@dimen/default_left_gap"
+    android:paddingRight="@dimen/default_right_gap">
+
+    <EditText
+        android:id="@+id/edit_forum_create"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="start"
+        android:hint="输入主题内容"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textColorHint="@color/colorInputHintText"
+        android:textSize="@dimen/ft14" />
+
+</RelativeLayout>

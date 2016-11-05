@@ -21,12 +21,28 @@
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
+    <style name="ToolbarTheme" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">@style/Toolbar</item>
+    </style>
+
     <style name="ButtonTheme.Radius" parent="AppTheme">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/default_left_gap</item>
         <item name="android:layout_marginRight">@dimen/default_right_gap</item>
         <item name="android:background">@drawable/button_background_radius</item>
+        <item name="android:textSize">@dimen/button_text_font_size</item>
+        <item name="android:textColor">@drawable/button_text_color</item>
+    </style>
+
+    <style name="ButtonTheme" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_background</item>
         <item name="android:textSize">@dimen/button_text_font_size</item>
         <item name="android:textColor">@drawable/button_text_color</item>
     </style>

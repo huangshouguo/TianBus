@@ -34,9 +34,9 @@
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.login.ForgotPasswordActivity" />
         <activity android:name=".view.home.AnnouncementDetailActivity" />
-        <activity android:name=".view.forum.ForumActivity" />
         <activity android:name=".view.common.WebActivity" />
-        <activity android:name=".view.help.BizDetailActivity"></activity>
+        <activity android:name=".view.help.BizDetailActivity" />
+        <activity android:name=".view.forum.ForumActivity" />
     </application>
 
 </manifest>

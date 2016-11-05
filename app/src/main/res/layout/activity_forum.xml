@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_forum"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.bus.tian.tianbus.view.forum.ForumActivity">
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <!--tool bar-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar_forum"
+            style="@style/ToolbarTheme"
+            app:title="@string/text_message_board" />
+    </android.support.design.widget.AppBarLayout>
+
+    <!--content-->
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/layout_content_forum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_forum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_left_gap"
+            android:src="@drawable/ic_add"
+            app:fabSize="normal"
+            app:layout_anchor="@id/layout_content_forum"
+            app:layout_anchorGravity="bottom|right|end" />
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

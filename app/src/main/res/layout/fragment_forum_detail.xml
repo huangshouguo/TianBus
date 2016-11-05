@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_forum_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!--theme-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="@dimen/default_left_gap"
+        android:paddingRight="@dimen/default_right_gap"
+        android:paddingTop="10dp">
+
+        <!--title-->
+        <TextView
+            android:id="@+id/text_forum_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="title"
+            android:textColor="@color/colorTitleText"
+            android:textSize="@dimen/ft20" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
+
+            <!--creator-->
+            <TextView
+                android:id="@+id/text_forum_detail_creator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="5dp"
+                android:text="楼主(156****1234)"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/ft10" />
+
+            <!--create time-->
+            <TextView
+                android:id="@+id/text_forum_detail_create_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="5dp"
+                android:text="2015-10-20 09:10:20"
+                android:textColor="@color/colorContentText"
+                android:textSize="@dimen/ft10" />
+
+            <!--comment count-->
+            <TextView
+                android:id="@+id/text_forum_detail_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评论(1230)"
+                android:textColor="@color/colorContentText"
+                android:textSize="@dimen/ft10" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--reply list-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_forum_detail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorBackground" />
+
+
+    <!--reply action-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackgroundDark"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_text_forum_detail_reply"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edit_radius_bg"
+            android:hint="回复：156****2291"
+            android:padding="5dp"
+            android:textSize="@dimen/ft12" />
+
+        <Button
+            android:id="@+id/btn_forum_detail_send"
+            style="@style/ButtonTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送"
+            android:textColorHint="@color/colorInputHintText" />
+    </LinearLayout>
+</LinearLayout>

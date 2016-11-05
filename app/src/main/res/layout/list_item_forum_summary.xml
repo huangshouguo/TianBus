@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="@dimen/default_left_gap"
+    android:paddingRight="@dimen/default_right_gap"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!--Title-->
+        <TextView
+            android:id="@+id/text_forum_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="title"
+            android:textColor="@color/colorTitleText"
+            android:textSize="@dimen/ft16" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+
+            <!--creator-->
+            <TextView
+                android:id="@+id/text_forum_item_creator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="151****1234"
+                android:textColor="@color/colorContentText"
+                android:textSize="@dimen/ft12" />
+
+            <!--create time-->
+            <TextView
+                android:id="@+id/text_forum_item_create_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="2015-10-20"
+                android:textColor="@color/colorContentText"
+                android:textSize="@dimen/ft12" />
+
+            <!--comment count-->
+            <TextView
+                android:id="@+id/text_forum_item_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(20111)"
+                android:textColor="@color/colorContentText"
+                android:textSize="@dimen/ft12" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--next-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_next" />
+</LinearLayout>
