@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/menu_home"
-        android:checkable="true"
-        android:icon="@drawable/ic_home"
-        android:title="@string/text_home"/>
+    <item android:title="@string/app_name">
+        <menu>
+            <item
+                android:id="@+id/menu_home"
+                android:checkable="true"
+                android:icon="@drawable/ic_home"
+                android:title="@string/text_home" />
 
-    <item
-        android:id="@+id/menu_help"
-        android:checkable="true"
-        android:icon="@drawable/ic_help"
-        android:title="@string/text_query"/>
+            <item
+                android:id="@+id/menu_help"
+                android:checkable="true"
+                android:icon="@drawable/ic_help"
+                android:title="@string/text_query" />
 
-    <item
-        android:id="@+id/menu_me"
-        android:icon="@drawable/ic_me"
-        android:checkable="true"
-        android:title="@string/text_me"/>
+            <item
+                android:id="@+id/menu_me"
+                android:checkable="true"
+                android:icon="@drawable/ic_me"
+                android:title="@string/text_me" />
+        </menu>
+    </item>
+
+    <item android:title="选项">
+        <menu>
+            <item
+                android:id="@+id/menu_setting"
+                android:checkable="true"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/text_setting" />
+            <item
+                android:id="@+id/menu_about_us"
+                android:checkable="true"
+                android:icon="@drawable/ic_info"
+                android:title="@string/text_about_us" />
+        </menu>
+    </item>
 </menu>

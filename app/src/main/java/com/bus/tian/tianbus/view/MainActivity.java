@@ -24,11 +24,13 @@ import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
 import com.bus.tian.tianbus.di.module.MainModule;
 import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.UserManager;
+import com.bus.tian.tianbus.view.about.AboutFragment;
 import com.bus.tian.tianbus.view.forum.ForumActivity;
 import com.bus.tian.tianbus.view.help.HelpFragment;
 import com.bus.tian.tianbus.view.home.HomeFragment;
 import com.bus.tian.tianbus.view.login.LoginActivity;
 import com.bus.tian.tianbus.view.me.MeFragment;
+import com.bus.tian.tianbus.view.setting.SettingFragment;
 
 import javax.inject.Inject;
 
@@ -61,6 +63,8 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
     private HomeFragment homeFragment;
     private HelpFragment helpFragment;
     private MeFragment meFragment;
+    private SettingFragment settingFragment;
+    private AboutFragment aboutFragment;
 
     @Override
     protected int getContentViewResId() {
@@ -89,11 +93,11 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         showHomeFragment();
     }
 
-    private void initFloatActionBar(){
+    private void initFloatActionBar() {
         this.fabMain.setOnClickListener(v -> showForum());
     }
 
-    private void showForum(){
+    private void showForum() {
         ForumActivity.actionStart(this);
     }
 
@@ -156,6 +160,12 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
                         break;
                     case R.id.menu_me:
                         showMeFragment();
+                        break;
+                    case R.id.menu_setting:
+                        showSettingFragment();
+                        break;
+                    case R.id.menu_about_us:
+                        showAboutFragment();
                         break;
                     default:
                         break;
@@ -230,7 +240,27 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         updateActionBarTitle(getString(R.string.text_me));
     }
 
-    private void updateActionBarTitle(final String title){
+    private void showSettingFragment() {
+        if (this.settingFragment == null){
+            this.settingFragment = SettingFragment.getInstance();
+        }
+
+        updateFragment(this.settingFragment, this.preFragment);
+        this.navigationView.setCheckedItem(R.id.menu_setting);
+        updateActionBarTitle(getString(R.string.text_setting));
+    }
+
+    private void showAboutFragment() {
+        if (this.aboutFragment == null){
+            this.aboutFragment = AboutFragment.getInstance();
+        }
+
+        updateFragment(this.aboutFragment, this.preFragment);
+        this.navigationView.setCheckedItem(R.id.menu_about_us);
+        updateActionBarTitle(getString(R.string.text_about_us));
+    }
+
+    private void updateActionBarTitle(final String title) {
         if (!TextUtils.isEmpty(title)) {
             getSupportActionBar().setTitle(title);
         }
@@ -274,6 +304,11 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
 
         public HeaderHolder(View view) {
             ButterKnife.bind(this, view);
+            if (UserManager.getInstance().isLogined()) {
+                updateHeaderViewOnLogin();
+            } else {
+                updateHeaderViewOnLogout();
+            }
         }
 
         public void updateHeaderViewOnLogin() {

@@ -16,6 +16,8 @@
     <string name="text_home">首页</string>
     <string name="text_query">查询</string>
     <string name="text_me">我的</string>
+    <string name="text_setting">设置</string>
+    <string name="text_about_us">关于</string>
 
     <string name="text_call_cop">一键拨打110</string>
     <string name="text_call_cop_local">一键联系片警</string>
