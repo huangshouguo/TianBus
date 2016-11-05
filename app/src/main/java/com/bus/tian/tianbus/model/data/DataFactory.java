@@ -46,9 +46,9 @@ public class DataFactory {
     public static List<HelpBizBean> getHelpBizData() {
         List<HelpBizBean> list = new ArrayList<>();
 
+
         //户籍业务
         list.add(new HelpBizBean(true, "户籍业务"));
-
 
         TitleContentBean section1Test1 = new TitleContentBean();
         section1Test1.setTitle("身份证业务");
@@ -79,50 +79,124 @@ public class DataFactory {
         list.add(new HelpBizBean(section1Test1));
 
         TitleContentBean section1Test2 = new TitleContentBean();
-        section1Test2.setTitle("title2");
+        section1Test2.setTitle("企业职工落户迁入");
         section1Test2.setContent("content2");
         list.add(new HelpBizBean(section1Test2));
+
+        TitleContentBean section1Test3 = new TitleContentBean();
+        section1Test3.setTitle("公民民族成分变更");
+        section1Test3.setContent("content2");
+        list.add(new HelpBizBean(section1Test3));
+
+        TitleContentBean section1Test4 = new TitleContentBean();
+        section1Test4.setTitle("军人专业和复原安置落户");
+        section1Test4.setContent("content2");
+        list.add(new HelpBizBean(section1Test4));
+
+        TitleContentBean section1Test5 = new TitleContentBean();
+        section1Test5.setTitle("大中专招生迁出");
+        section1Test5.setContent("content2");
+        list.add(new HelpBizBean(section1Test5));
+
+        TitleContentBean section1Test6 = new TitleContentBean();
+        section1Test6.setTitle("婴儿出生落户");
+        section1Test6.setContent("content2");
+        list.add(new HelpBizBean(section1Test6));
+
+        TitleContentBean section1Test7 = new TitleContentBean();
+        section1Test7.setTitle("居住证办理");
+        section1Test7.setContent("content2");
+        list.add(new HelpBizBean(section1Test7));
+
+        TitleContentBean section1Test8 = new TitleContentBean();
+        section1Test8.setTitle("干部、工人调动户口迁移迁入");
+        section1Test8.setContent("content2");
+        list.add(new HelpBizBean(section1Test8));
+
+        TitleContentBean section1Test9 = new TitleContentBean();
+        section1Test9.setTitle("投靠落户");
+        section1Test9.setContent("content2");
+        list.add(new HelpBizBean(section1Test9));
+
+        TitleContentBean section1Test10 = new TitleContentBean();
+        section1Test10.setTitle("购房户口迁入");
+        section1Test10.setContent("content2");
+        list.add(new HelpBizBean(section1Test10));
+
+        TitleContentBean section1Test11 = new TitleContentBean();
+        section1Test11.setTitle("随军家属户口迁移");
+        section1Test11.setContent("content2");
+        list.add(new HelpBizBean(section1Test11));
+
+        TitleContentBean section1Test12 = new TitleContentBean();
+        section1Test12.setTitle("高校毕业生落户");
+        section1Test12.setContent("content2");
+        list.add(new HelpBizBean(section1Test12));
+
+
 
         //出入境业务
         list.add(new HelpBizBean(true, "出入境业务"));
 
         TitleContentBean section2Test1 = new TitleContentBean();
-        section2Test1.setTitle("title1");
-        section2Test1.setContent("content1");
+        section2Test1.setTitle("中华人民共和国护照受理");
+        section2Test1.setContent("中华人民共和国护照受理");
         list.add(new HelpBizBean(section2Test1));
 
         TitleContentBean section2Test2 = new TitleContentBean();
-        section2Test2.setTitle("title2");
+        section2Test2.setTitle("往来港澳通行证及签注");
         section2Test2.setContent("content2");
         list.add(new HelpBizBean(section2Test2));
+
 
 
         //治安业务
         list.add(new HelpBizBean(true, "治安业务"));
 
         TitleContentBean section3Test1 = new TitleContentBean();
-        section3Test1.setTitle("title1");
+        section3Test1.setTitle("典当行业许可证审批");
         section3Test1.setContent("content1");
         list.add(new HelpBizBean(section3Test1));
 
         TitleContentBean section3Test2 = new TitleContentBean();
-        section3Test2.setTitle("title2");
+        section3Test2.setTitle("大型群众活动审批");
         section3Test2.setContent("content2");
         list.add(new HelpBizBean(section3Test2));
 
+        TitleContentBean section3Test3 = new TitleContentBean();
+        section3Test3.setTitle("娱乐场所备案");
+        section3Test3.setContent("content1");
+        list.add(new HelpBizBean(section3Test3));
 
-        //section4
-        list.add(new HelpBizBean(true, "section 4"));
+        TitleContentBean section3Test4 = new TitleContentBean();
+        section3Test4.setTitle("旅馆业许可证审批—治安管理档案变更");
+        section3Test4.setContent("content2");
+        list.add(new HelpBizBean(section3Test4));
 
-        TitleContentBean section4Test1 = new TitleContentBean();
-        section4Test1.setTitle("title1");
-        section4Test1.setContent("content1");
-        list.add(new HelpBizBean(section3Test1));
+        TitleContentBean section3Test5 = new TitleContentBean();
+        section3Test5.setTitle("旅馆业许可证审批—治安管理档案年度审核");
+        section3Test5.setContent("content1");
+        list.add(new HelpBizBean(section3Test5));
 
-        TitleContentBean section4Test2 = new TitleContentBean();
-        section4Test2.setTitle("title2");
-        section4Test2.setContent("content2");
-        list.add(new HelpBizBean(section3Test2));
+        TitleContentBean section3Test6 = new TitleContentBean();
+        section3Test6.setTitle("旅馆业许可证审批—治安管理档案新办证");
+        section3Test6.setContent("content2");
+        list.add(new HelpBizBean(section3Test6));
+
+        TitleContentBean section3Test7 = new TitleContentBean();
+        section3Test7.setTitle("烟花爆竹道路运输许可证审批");
+        section3Test7.setContent("content1");
+        list.add(new HelpBizBean(section3Test7));
+
+        TitleContentBean section3Test8 = new TitleContentBean();
+        section3Test8.setTitle("焰火晚会烟花爆竹燃放工程审批");
+        section3Test8.setContent("content2");
+        list.add(new HelpBizBean(section3Test8));
+
+        TitleContentBean section3Test9 = new TitleContentBean();
+        section3Test9.setTitle("购买运输民用爆炸物品审批");
+        section3Test9.setContent("content2");
+        list.add(new HelpBizBean(section3Test9));
 
         return list;
     }
