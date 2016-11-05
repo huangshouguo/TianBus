@@ -46,13 +46,36 @@ public class DataFactory {
     public static List<HelpBizBean> getHelpBizData() {
         List<HelpBizBean> list = new ArrayList<>();
 
-        //section1
-        list.add(new HelpBizBean(true, "section 1"));
+        //户籍业务
+        list.add(new HelpBizBean(true, "户籍业务"));
 
 
         TitleContentBean section1Test1 = new TitleContentBean();
-        section1Test1.setTitle("title1");
-        section1Test1.setContent("content1");
+        section1Test1.setTitle("身份证业务");
+        section1Test1.setContent("\n" +
+                "一、所需材料\n" +
+                "    \n" +
+                "1、申领人、补领：申请人户口簿（个人信息页）\n" +
+                "    \n" +
+                "2、换领：到期身份证(正反面)\n" +
+                "\n" +
+                "\n" +
+                "二、预受理时限： \n" +
+                "3个工作日\n" +
+                "\n" +
+                "\n" +
+                "三、办理费用\n" +
+                "    \n" +
+                "1、初次申领、换领每证20元\n" +
+                "\n" +
+                "    \n" +
+                "2、丢失补领或损坏换领每证40元\n" +
+                "\n" +
+                "    \n" +
+                "3、临时居民身份证每证10元\n" +
+                "\n" +
+                "\n" +
+                "四、受理地点:户籍地派出所");
         list.add(new HelpBizBean(section1Test1));
 
         TitleContentBean section1Test2 = new TitleContentBean();
@@ -60,8 +83,8 @@ public class DataFactory {
         section1Test2.setContent("content2");
         list.add(new HelpBizBean(section1Test2));
 
-        //section2
-        list.add(new HelpBizBean(true, "section 2"));
+        //出入境业务
+        list.add(new HelpBizBean(true, "出入境业务"));
 
         TitleContentBean section2Test1 = new TitleContentBean();
         section2Test1.setTitle("title1");
@@ -74,8 +97,8 @@ public class DataFactory {
         list.add(new HelpBizBean(section2Test2));
 
 
-        //section3
-        list.add(new HelpBizBean(true, "section 3"));
+        //治安业务
+        list.add(new HelpBizBean(true, "治安业务"));
 
         TitleContentBean section3Test1 = new TitleContentBean();
         section3Test1.setTitle("title1");

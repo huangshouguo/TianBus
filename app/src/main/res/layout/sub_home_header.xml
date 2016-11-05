@@ -7,8 +7,8 @@
     <!--banner-->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/cardview_dark_background"/>
+        android:layout_height="200dp"
+        android:background="@mipmap/banner2"/>
 
     <!--打击犯罪-->
     <include layout="@layout/fight_crimes"/>
