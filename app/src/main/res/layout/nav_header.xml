@@ -13,7 +13,7 @@
         android:layout_width="@dimen/nav_header_img_size"
         android:layout_height="@dimen/nav_header_img_size"
         android:layout_gravity="center"
-        android:src="@drawable/logo" />
+        android:src="@drawable/user" />
 
     <TextView
         android:id="@+id/text_nav_header"

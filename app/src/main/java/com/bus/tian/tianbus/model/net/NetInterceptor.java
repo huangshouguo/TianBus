@@ -1,5 +1,7 @@
 package com.bus.tian.tianbus.model.net;
 
+import com.bus.tian.tianbus.util.UserManager;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -17,6 +19,8 @@ public class NetInterceptor implements Interceptor {
         ////////////////////////////////////////////////////////////////////////////////////////////
         // request
         Request.Builder originalRequestBuilder = chain.request().newBuilder();
+
+        originalRequestBuilder.addHeader("User-Token", UserManager.getInstance().getUserToken());
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         // response

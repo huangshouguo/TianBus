@@ -301,6 +301,8 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         Drawable drawableUser;
         @BindString(R.string.text_login_onclick)
         String textLoginOnClick;
+        @BindString(R.string.app_name)
+        String textAppName;
 
         public HeaderHolder(View view) {
             ButterKnife.bind(this, view);
@@ -314,14 +316,14 @@ public class MainActivity extends BaseActivity implements IMainContract.IView {
         public void updateHeaderViewOnLogin() {
             UserBean userBean = UserManager.getInstance().getUserOfLogined();
             if (userBean != null) {
-                this.textTitle.setText(userBean.getPhone());
-                this.imgHeader.setImageDrawable(drawableUser);
+                this.textTitle.setText(textAppName);
+                this.imgHeader.setImageDrawable(drawableLogo);
             }
         }
 
         public void updateHeaderViewOnLogout() {
             this.textTitle.setText(textLoginOnClick);
-            this.imgHeader.setImageDrawable(drawableLogo);
+            this.imgHeader.setImageDrawable(drawableUser);
         }
     }
 }

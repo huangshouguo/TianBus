@@ -3,6 +3,7 @@ package com.bus.tian.tianbus.model.api;
 import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.model.bean.ForumCommentBean;
 import com.bus.tian.tianbus.model.bean.ForumSummaryBean;
+import com.bus.tian.tianbus.model.bean.UserBean;
 import com.bus.tian.tianbus.util.UserManager;
 
 import java.util.Date;
@@ -21,6 +22,10 @@ public class ApiExtension {
 
     public static Observable<ApiResponseBean<ForumSummaryBean>> createForumTheme(IApi api, String title) {
         return api.createForumTheme(getUid(), title, getNowTime());
+    }
+
+    public static Observable<ApiResponseBean<UserBean>> logout(IApi api){
+        return api.logout(getUid());
     }
 
     private static String getUid() {

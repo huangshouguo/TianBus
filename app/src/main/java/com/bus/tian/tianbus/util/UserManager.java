@@ -57,6 +57,14 @@ public class UserManager {
         sendTokenInvalidEvent();
     }
 
+    public String getUserToken() {
+        String result = null;
+        if (isLogined()) {
+            result = getUserOfLogined().getToken();
+        }
+        return result;
+    }
+
     private void sendLoginSuccessEvent() {
         if (RxBusUtil.getDefaultInstance().hasObservers()) {
             RxBusUtil.getDefaultInstance()

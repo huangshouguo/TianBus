@@ -66,7 +66,7 @@ public interface IApi {
     @FormUrlEncoded
     @POST("logout")
     Observable<ApiResponseBean<UserBean>> logout(
-            @Field("uid") String uid);
+            @Query("uid") String uid);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // 警情相关Api
