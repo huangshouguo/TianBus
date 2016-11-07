@@ -127,6 +127,7 @@ public class HomeFragment extends BaseFragment implements IHomeContract.IView {
                     callLocalCopper();
                     break;
                 case R.id.btn_capture_photo:
+                    startCaptureImage();
                     break;
                 case R.id.btn_capture_video:
                     break;
@@ -145,6 +146,10 @@ public class HomeFragment extends BaseFragment implements IHomeContract.IView {
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:110"));
             startActivity(intent);
+        }
+
+        private void startCaptureImage(){
+            CameraActivity.actionStart(baseActivity);
         }
     }
 }

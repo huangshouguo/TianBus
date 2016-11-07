@@ -6,7 +6,6 @@ import com.bus.tian.tianbus.model.bean.ForumDetailBean;
 import com.bus.tian.tianbus.model.bean.ForumSummaryBean;
 import com.bus.tian.tianbus.model.bean.UserBean;
 
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.http.Field;
@@ -86,7 +85,7 @@ public interface IApi {
             @Field("uid") String uid,
             @Field("themeId") String themeId,
             @Field("bizId") String bizId,
-            @Field("createTime") Date createTime,
+            @Field("createTime") long createTime,
             @Field("comment") String comment);
 
     @FormUrlEncoded
@@ -94,5 +93,5 @@ public interface IApi {
     Observable<ApiResponseBean<ForumSummaryBean>> createForumTheme(
             @Field("uid") String uid,
             @Field("title") String title,
-            @Field("createTime") Date createTime);
+            @Field("createTime") long createTime);
 }

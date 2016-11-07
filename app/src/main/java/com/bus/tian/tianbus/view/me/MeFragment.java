@@ -74,7 +74,6 @@ public class MeFragment extends BaseFragment implements IMeContract.IView {
         ButterKnife.bind(this, rootView);
         this.textUser.setText(UserManager.getInstance().getUserOfLogined().getPhone());
         setHasOptionsMenu(true);
-
     }
 
     @Override

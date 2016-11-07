@@ -36,7 +36,7 @@ public class ApiExtension {
         return null;
     }
 
-    private static Date getNowTime() {
-        return new Date();
+    private static long getNowTime() {
+        return new Date().getTime();
     }
 }
