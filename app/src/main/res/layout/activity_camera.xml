@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_camera"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!--comments-->
+    <EditText
+        android:id="@+id/edit_camera_comment"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="@dimen/default_left_gap"
+        android:layout_marginRight="@dimen/default_right_gap"
+        android:layout_marginTop="@dimen/default_left_gap"
+        android:hint="添加评论描述"/>
+
+    <!--location-->
+    <EditText
+        android:id="@+id/edit_camera_location"
+        style="@style/EditTextIconStyle"
+        android:drawableLeft="@drawable/ic_location"
+        android:hint="位置信息"
+        android:textSize="@dimen/ft12"/>
+
+    <!--image-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/image_camera_show"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/default_left_gap"
+            android:layout_marginRight="@dimen/default_right_gap"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/image_video_bg"
+            android:scaleType="fitXY"/>
+
+        <VideoView
+            android:id="@+id/video_camera_show"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="@dimen/default_left_gap"
+            android:layout_marginRight="@dimen/default_right_gap"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/image_video_bg"
+            android:foregroundGravity="center"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <!--submit-->
+    <Button
+        android:id="@+id/btn_camera_upload"
+        style="@style/ButtonTheme"
+        android:text="上传"/>
+</LinearLayout>
