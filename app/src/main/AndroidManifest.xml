@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.bus.tian.tianbus">
+    package="com.bus.tian.tianbus">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT"/>
-    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT"/>
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAPTURE_SECURE_VIDEO_OUTPUT" />
+    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
 
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
-        android:smallScreens="true"/>
+        android:smallScreens="true" />
 
     <application
         android:name=".BusApplication"
@@ -31,20 +36,19 @@
             android:name=".view.MainActivity"
             android:theme="@style/AppTheme.OverlabSystemBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.login.RegisterActivity"/>
-        <activity android:name=".view.login.LoginActivity"/>
-        <activity android:name=".view.login.ForgotPasswordActivity"/>
-        <activity android:name=".view.home.AnnouncementDetailActivity"/>
-        <activity android:name=".view.common.WebActivity"/>
-        <activity android:name=".view.help.BizDetailActivity"/>
-        <activity android:name=".view.forum.ForumActivity"/>
-        <activity android:name=".view.home.CameraActivity">
-        </activity>
+        <activity android:name=".view.login.RegisterActivity" />
+        <activity android:name=".view.login.LoginActivity" />
+        <activity android:name=".view.login.ForgotPasswordActivity" />
+        <activity android:name=".view.home.AnnouncementDetailActivity" />
+        <activity android:name=".view.common.WebActivity" />
+        <activity android:name=".view.help.BizDetailActivity" />
+        <activity android:name=".view.forum.ForumActivity" />
+        <activity android:name=".view.home.CameraActivity" />
     </application>
 
 </manifest>
