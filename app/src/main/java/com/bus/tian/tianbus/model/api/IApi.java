@@ -4,14 +4,19 @@ import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.model.bean.ForumCommentBean;
 import com.bus.tian.tianbus.model.bean.ForumDetailBean;
 import com.bus.tian.tianbus.model.bean.ForumSummaryBean;
+import com.bus.tian.tianbus.model.bean.ImageVideoBean;
 import com.bus.tian.tianbus.model.bean.UserBean;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -69,6 +74,32 @@ public interface IApi {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // 警情相关Api
+    @Multipart
+    @POST("image")
+    Observable<ResponseBody> uploadPhotoCaptured(
+            @Part("uid") String uid,
+            @Part("location") String location,
+            @Part("createTime") String createTime,
+            @Part("comment") String comment,
+            @Part MultipartBody.Part image);
+
+    @Multipart
+    @POST("video")
+    Observable<ResponseBody> uploadVideoCaptured(
+            @Part("uid") String uid,
+            @Part("location") String location,
+            @Part("createTime") String createTime,
+            @Part("comment") String comment,
+            @Part MultipartBody.Part video);
+
+    @GET("image/summary")
+    Observable<List<ImageVideoBean>> getPhotoRecordSummary(
+            @Query("uid") String uid);
+
+    @GET("video/summary")
+    Observable<List<ImageVideoBean>> getVideoRecordSummary(
+            @Query("uid") String uid);
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // 警务交流相关Api
