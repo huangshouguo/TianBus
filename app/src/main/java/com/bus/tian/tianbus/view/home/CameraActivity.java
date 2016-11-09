@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.bus.tian.tianbus.R;
@@ -160,7 +161,9 @@ public class CameraActivity extends BaseActivity {
             return;
         }
         this.imageShow.setVisibility(View.GONE);
-        this.videoShow.setVideoURI(videoUri);
         this.videoShow.setVisibility(View.VISIBLE);
+        this.videoShow.setMediaController(new MediaController(this));
+        this.videoShow.setVideoURI(videoUri);
+        this.videoShow.start();
     }
 }
