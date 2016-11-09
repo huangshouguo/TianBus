@@ -20,7 +20,9 @@ public class NetInterceptor implements Interceptor {
         // request
         Request.Builder originalRequestBuilder = chain.request().newBuilder();
 
-        originalRequestBuilder.addHeader("User-Token", UserManager.getInstance().getUserToken());
+        if (UserManager.getInstance().isLogined()) {
+            originalRequestBuilder.addHeader("User-Token", UserManager.getInstance().getUserToken());
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         // response
