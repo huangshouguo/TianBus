@@ -14,17 +14,29 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        configurations {
+            storeFile file("keystore.jks")
+            storePassword "123456"
+            keyAlias "tianbus"
+            keyPassword "123456"
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled true
             // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.configurations
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.configurations
         }
     }
     //http://stackoverflow.com/questions/37347326/errorconflict-with-dependency-com-google-code-findbugsjsr305
@@ -95,4 +107,16 @@ dependencies {
     testCompile "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
     androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
     compile 'com.android.support:support-v4:24.2.1'
+}
+
+task nativeLibsToJar(type: Zip, description: "create a jar archive of the native libs") {
+    destinationDir file("$projectDir/libs")
+    baseName "Native_Libs2"
+    extension "jar"
+    from fileTree(dir: "libs", include: "**/*.so")
+    into "lib"
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn(nativeLibsToJar)
 }

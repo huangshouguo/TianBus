@@ -1,19 +1,15 @@
 package com.bus.tian.tianbus.view.home;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -24,13 +20,13 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.bus.tian.tianbus.R;
+import com.bus.tian.tianbus.util.LocationUtil;
 import com.bus.tian.tianbus.view.BaseActivity;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,8 +55,6 @@ public class CameraActivity extends BaseActivity {
     private Uri imageUri;
     private String strStartSource;
     private String strCurPhotoPath;
-    private LocationManager locationManager;
-    private Location location;
 
     public static void actionStartPhoto(Context context) {
         Intent intent = new Intent(context, CameraActivity.class);
@@ -83,56 +77,26 @@ public class CameraActivity extends BaseActivity {
     protected void initData() {
         Intent intent = getIntent();
         this.strStartSource = intent.getStringExtra(START_TAG);
-        this.locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        String locationProvider = null;
-        List<String> providerList = this.locationManager.getProviders(true);
-        if (providerList.contains(LocationManager.GPS_PROVIDER)) {
-            locationProvider = LocationManager.GPS_PROVIDER;
-        } else if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
-            locationProvider = LocationManager.NETWORK_PROVIDER;
-        } else {
-            showErrorMessage("No location provider to use");
-        }
-
-        if (!TextUtils.isEmpty(locationProvider)) {
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            this.location = this.locationManager.getLastKnownLocation(locationProvider);
-            updateLocation(this.location);
-        }
-
-        this.locationManager.requestLocationUpdates(locationProvider, 5000, 1, new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                updateLocation(location);
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        });
     }
+
+    private final LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) { //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
+            // log it when the location changes
+            Log.d("LocationActivity", "location:" + location);
+        }
+
+        public void onProviderDisabled(String provider) {
+            // Provider被disable时触发此函数，比如GPS被关闭
+        }
+
+        public void onProviderEnabled(String provider) {
+            //  Provider被enable时触发此函数，比如GPS被打开
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            // Provider的转态在可用、暂时不可用和无服务三个状态直接切换时触发此函数
+        }
+    };
 
     @Override
     protected void initView() {
@@ -151,6 +115,8 @@ public class CameraActivity extends BaseActivity {
         } else {
             finish();
         }
+
+        this.editLocation.setText(LocationUtil.getInstance().getLocationAddress());
     }
 
     @Override
@@ -227,7 +193,4 @@ public class CameraActivity extends BaseActivity {
         this.videoShow.start();
     }
 
-    private void updateLocation(Location location){
-        Log.e(TAG, "updateLocation() called with: location = [" + location + "]");
-    }
 }
