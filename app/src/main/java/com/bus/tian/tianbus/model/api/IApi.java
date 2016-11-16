@@ -10,7 +10,7 @@ import com.bus.tian.tianbus.model.bean.UserBean;
 import java.util.List;
 
 import okhttp3.MultipartBody;
-import okhttp3.ResponseBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -70,34 +70,34 @@ public interface IApi {
     @FormUrlEncoded
     @POST("logout")
     Observable<ApiResponseBean<UserBean>> logout(
-            @Query("uid") String uid);
+            @Field("uid") String uid);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // 警情相关Api
     @Multipart
     @POST("image")
-    Observable<ResponseBody> uploadPhotoCaptured(
-            @Part("uid") String uid,
-            @Part("location") String location,
-            @Part("createTime") String createTime,
-            @Part("comment") String comment,
+    Observable<ApiResponseBean<ImageVideoBean>> uploadPhotoCaptured(
+            @Part("uid") RequestBody uid,
+            @Part("location") RequestBody location,
+            @Part("createTime") RequestBody createTime,
+            @Part("comment") RequestBody comment,
             @Part MultipartBody.Part image);
 
     @Multipart
     @POST("video")
-    Observable<ResponseBody> uploadVideoCaptured(
-            @Part("uid") String uid,
-            @Part("location") String location,
-            @Part("createTime") String createTime,
-            @Part("comment") String comment,
+    Observable<ApiResponseBean<ImageVideoBean>> uploadVideoCaptured(
+            @Part("uid") RequestBody uid,
+            @Part("location") RequestBody location,
+            @Part("createTime") RequestBody createTime,
+            @Part("comment") RequestBody comment,
             @Part MultipartBody.Part video);
 
     @GET("image/summary")
-    Observable<List<ImageVideoBean>> getPhotoRecordSummary(
+    Observable<ApiResponseBean<List<ImageVideoBean>>> getPhotoRecordSummary(
             @Query("uid") String uid);
 
     @GET("video/summary")
-    Observable<List<ImageVideoBean>> getVideoRecordSummary(
+    Observable<ApiResponseBean<List<ImageVideoBean>>> getVideoRecordSummary(
             @Query("uid") String uid);
 
 

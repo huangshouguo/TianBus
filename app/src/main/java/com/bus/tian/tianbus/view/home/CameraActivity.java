@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationListener;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -20,6 +17,11 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.bus.tian.tianbus.R;
+import com.bus.tian.tianbus.contract.IUploadFileContract;
+import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
+import com.bus.tian.tianbus.di.component.DaggerIUploadFileComponent;
+import com.bus.tian.tianbus.di.module.UploadFileModule;
+import com.bus.tian.tianbus.model.bean.ImageVideoBean;
 import com.bus.tian.tianbus.util.LocationUtil;
 import com.bus.tian.tianbus.view.BaseActivity;
 
@@ -28,11 +30,13 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CameraActivity extends BaseActivity {
+public class CameraActivity extends BaseActivity implements IUploadFileContract.IView {
     private static final int REQ_TAKE_PHOTO = 1;
     private static final int REQ_VIDEO_CAPTURE = 2;
     private static final String START_TAG = "start_tag";
@@ -50,11 +54,12 @@ public class CameraActivity extends BaseActivity {
     EditText editLocation;
     @BindView(R.id.video_camera_show)
     VideoView videoShow;
+    @Inject
+    IUploadFileContract.IPresenter presenter;
 
-
-    private Uri imageUri;
     private String strStartSource;
     private String strCurPhotoPath;
+    private String strCurVideoPath;
 
     public static void actionStartPhoto(Context context) {
         Intent intent = new Intent(context, CameraActivity.class);
@@ -77,26 +82,12 @@ public class CameraActivity extends BaseActivity {
     protected void initData() {
         Intent intent = getIntent();
         this.strStartSource = intent.getStringExtra(START_TAG);
+        DaggerIUploadFileComponent.builder()
+                .iNetCompoent(DaggerINetCompoent.create())
+                .uploadFileModule(new UploadFileModule(this))
+                .build()
+                .inject(this);
     }
-
-    private final LocationListener locationListener = new LocationListener() {
-        public void onLocationChanged(Location location) { //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
-            // log it when the location changes
-            Log.d("LocationActivity", "location:" + location);
-        }
-
-        public void onProviderDisabled(String provider) {
-            // Provider被disable时触发此函数，比如GPS被关闭
-        }
-
-        public void onProviderEnabled(String provider) {
-            //  Provider被enable时触发此函数，比如GPS被打开
-        }
-
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            // Provider的转态在可用、暂时不可用和无服务三个状态直接切换时触发此函数
-        }
-    };
 
     @Override
     protected void initView() {
@@ -121,11 +112,15 @@ public class CameraActivity extends BaseActivity {
 
     @Override
     protected void onRelease() {
-
+        if (this.presenter != null) {
+            this.presenter.onRelease();
+            this.presenter = null;
+        }
     }
 
     @OnClick(R.id.btn_camera_upload)
     public void onClick() {
+        upload();
     }
 
     private void startCameraForPhoto() {
@@ -139,11 +134,22 @@ public class CameraActivity extends BaseActivity {
 
     private void startCameraForVideo() {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        File videoFile = createVideoFile();
+        if (videoFile != null) {
+            showRemainderMessage("仅可拍摄5秒钟短视频");
+            intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 5);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(videoFile));
+        }
         startActivityForResult(intent, REQ_VIDEO_CAPTURE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_CANCELED) {
+            finish();
+            return;
+        }
+
         switch (requestCode) {
             case REQ_TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
@@ -152,7 +158,7 @@ public class CameraActivity extends BaseActivity {
                 break;
             case REQ_VIDEO_CAPTURE:
                 if (resultCode == RESULT_OK) {
-                    reviewVideo(data.getData());
+                    reviewVideo();
                 }
                 break;
         }
@@ -162,7 +168,7 @@ public class CameraActivity extends BaseActivity {
         File image = null;
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = "Jpeg_" + timeStamp + "_";
+            String imageFileName = "image_" + timeStamp + "_";
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
             image = File.createTempFile(imageFileName, ".jpg", storageDir);
             this.strCurPhotoPath = image.getAbsolutePath();
@@ -173,24 +179,99 @@ public class CameraActivity extends BaseActivity {
         return image;
     }
 
-    private void reviewPhoto() {
-        this.videoShow.setVisibility(View.GONE);
-        Bitmap bitmap = BitmapFactory.decodeFile(this.strCurPhotoPath);
-        this.imageShow.setImageBitmap(bitmap);
-        this.imageShow.setVisibility(View.VISIBLE);
+    private File createVideoFile() {
+        File video = null;
+        try {
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String imageFileName = "video_" + timeStamp + "_";
+            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+            video = File.createTempFile(imageFileName, ".mp4", storageDir);
+            this.strCurVideoPath = video.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return video;
     }
 
-    private void reviewVideo(Uri videoUri) {
-        if (videoUri == null) {
-            Log.e(TAG, "reviewVideo: videoUri = " + videoUri);
+    private void reviewPhoto() {
+        if (TextUtils.isEmpty(this.strCurPhotoPath)) {
+            Log.e(TAG, "reviewPhoto: imagePath = " + strCurPhotoPath);
             return;
         }
 
+        Bitmap bitmap = BitmapFactory.decodeFile(this.strCurPhotoPath);
+        this.imageShow.setImageBitmap(bitmap);
+        this.videoShow.setVisibility(View.GONE);
+        this.imageShow.setVisibility(View.VISIBLE);
+    }
+
+    private void reviewVideo() {
+        if (this.strCurVideoPath == null) {
+            Log.e(TAG, "reviewVideo: videoPath = " + strCurVideoPath);
+            return;
+        }
         this.imageShow.setVisibility(View.GONE);
         this.videoShow.setVisibility(View.VISIBLE);
         this.videoShow.setMediaController(new MediaController(this));
-        this.videoShow.setVideoURI(videoUri);
+        this.videoShow.setVideoPath(this.strCurVideoPath);
         this.videoShow.start();
     }
 
+    @Override
+    public void uploadFileCompleted() {
+        finish();
+    }
+
+    private String getCommentContent() {
+        if (this.editComment == null) {
+            return null;
+        }
+        if (this.editComment.getText() == null || TextUtils.isEmpty(this.editComment.getText().toString())) {
+            showErrorMessage("评论不能为空");
+            return null;
+        }
+        return this.editComment.getText().toString();
+    }
+
+    private String getLocation() {
+        if (this.editLocation == null) {
+            return null;
+        }
+
+        if (this.editLocation.getText() == null || TextUtils.isEmpty(this.editLocation.getText().toString())) {
+            showErrorMessage("位置信息不能为空");
+            return null;
+        }
+        return this.editLocation.getText().toString();
+    }
+
+    private void upload() {
+        if (this.presenter != null) {
+
+            String strComment = getCommentContent();
+            String strLocation = getLocation();
+
+            if (TextUtils.isEmpty(strComment) || TextUtils.isEmpty(strLocation)) {
+                return;
+            }
+
+            ImageVideoBean imageVideoBean = new ImageVideoBean();
+            imageVideoBean.setComment(strComment);
+            imageVideoBean.setLocation(strLocation);
+
+            switch (this.strStartSource) {
+                case START_PHOTO:
+                    imageVideoBean.setFilePath(this.strCurPhotoPath);
+                    this.presenter.uploadImageFile(imageVideoBean);
+                    break;
+                case START_VIDEO:
+                    imageVideoBean.setFilePath(this.strCurVideoPath);
+                    this.presenter.uploadVideoFile(imageVideoBean);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

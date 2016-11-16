@@ -3,7 +3,9 @@ package com.bus.tian.tianbus.model.api;
 import com.bus.tian.tianbus.model.bean.ApiResponseBean;
 import com.bus.tian.tianbus.model.bean.ForumCommentBean;
 import com.bus.tian.tianbus.model.bean.ForumSummaryBean;
+import com.bus.tian.tianbus.model.bean.ImageVideoBean;
 import com.bus.tian.tianbus.model.bean.UserBean;
+import com.bus.tian.tianbus.util.MultiPartUtil;
 import com.bus.tian.tianbus.util.UserManager;
 
 import java.util.Date;
@@ -24,8 +26,26 @@ public class ApiExtension {
         return api.createForumTheme(getUid(), title, getNowTime());
     }
 
-    public static Observable<ApiResponseBean<UserBean>> logout(IApi api){
+    public static Observable<ApiResponseBean<UserBean>> logout(IApi api) {
         return api.logout(getUid());
+    }
+
+    public static Observable<ApiResponseBean<ImageVideoBean>> uploadPhotoCaptured(IApi api, String location, String comment, String imageFile) {
+        return api.uploadPhotoCaptured(
+                MultiPartUtil.string2RequestBody(getUid()),
+                MultiPartUtil.string2RequestBody(location),
+                MultiPartUtil.string2RequestBody(String.valueOf(getNowTime())),
+                MultiPartUtil.string2RequestBody(comment),
+                MultiPartUtil.imageFileToPart(imageFile));
+    }
+
+    public static Observable<ApiResponseBean<ImageVideoBean>> uploadVideoCaptured(IApi api, String location, String comment, String videoFile) {
+        return api.uploadVideoCaptured(
+                MultiPartUtil.string2RequestBody(getUid()),
+                MultiPartUtil.string2RequestBody(location),
+                MultiPartUtil.string2RequestBody(String.valueOf(getNowTime())),
+                MultiPartUtil.string2RequestBody(comment),
+                MultiPartUtil.videoFileToPart(videoFile));
     }
 
     private static String getUid() {
