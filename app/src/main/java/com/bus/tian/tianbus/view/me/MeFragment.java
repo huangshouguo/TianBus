@@ -86,5 +86,6 @@ public class MeFragment extends BaseFragment implements IMeContract.IView {
 
     @Override
     public void updateView() {
+
     }
 }

@@ -28,6 +28,8 @@ public class MePresenter extends BasePresenter implements IMeContract.IPresenter
             return;
         }
 
+        UserManager.getInstance().handleLogoutSuccess();
+
         Subscription subscription = ApiExtension.logout(getApi())
                 .compose(preHandleApiResponse())
                 .compose(doSchedulersAndBindLifecycle())
@@ -36,7 +38,6 @@ public class MePresenter extends BasePresenter implements IMeContract.IPresenter
                     public void onNext(UserBean userBean) {
                         super.onNext(userBean);
                         if (view != null) {
-                            UserManager.getInstance().handleLogoutSuccess();
                             view.updateView();
                         }
                     }
