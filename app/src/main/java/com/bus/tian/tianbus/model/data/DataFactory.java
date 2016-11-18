@@ -134,7 +134,6 @@ public class DataFactory {
         list.add(new HelpBizBean(section1Test12));
 
 
-
         //出入境业务
         list.add(new HelpBizBean(true, "出入境业务"));
 
@@ -147,7 +146,6 @@ public class DataFactory {
         section2Test2.setTitle("往来港澳通行证及签注");
         section2Test2.setContent("content2");
         list.add(new HelpBizBean(section2Test2));
-
 
 
         //治安业务
@@ -199,5 +197,12 @@ public class DataFactory {
         list.add(new HelpBizBean(section3Test9));
 
         return list;
+    }
+
+    public static List<String> getMeItemDataList() {
+        List<String> dataList = new ArrayList<>();
+        dataList.add("上传警情图片记录");
+        dataList.add("上传警情视频记录");
+        return dataList;
     }
 }

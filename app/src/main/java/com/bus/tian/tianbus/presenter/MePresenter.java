@@ -3,6 +3,7 @@ package com.bus.tian.tianbus.presenter;
 import com.bus.tian.tianbus.contract.IMeContract;
 import com.bus.tian.tianbus.model.api.ApiExtension;
 import com.bus.tian.tianbus.model.bean.UserBean;
+import com.bus.tian.tianbus.model.data.DataFactory;
 import com.bus.tian.tianbus.util.ApiRspSubscriber;
 import com.bus.tian.tianbus.util.UserManager;
 
@@ -28,20 +29,29 @@ public class MePresenter extends BasePresenter implements IMeContract.IPresenter
             return;
         }
 
-        UserManager.getInstance().handleLogoutSuccess();
-
         Subscription subscription = ApiExtension.logout(getApi())
                 .compose(preHandleApiResponse())
                 .compose(doSchedulersAndBindLifecycle())
                 .subscribe(new ApiRspSubscriber<UserBean>(this.view) {
                     @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        UserManager.getInstance().handleLogoutSuccess();
+                    }
+
+                    @Override
                     public void onNext(UserBean userBean) {
                         super.onNext(userBean);
-                        if (view != null) {
-                            view.updateView();
-                        }
+                        UserManager.getInstance().handleLogoutSuccess();
                     }
                 });
         addSubscription(subscription);
+    }
+
+    @Override
+    public void loadData() {
+        if (this.view != null) {
+            this.view.updateView(DataFactory.getMeItemDataList());
+        }
     }
 }

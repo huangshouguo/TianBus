@@ -90,9 +90,12 @@ public class ForumSummaryFragment extends BaseFragment implements IForumSummaryC
 
     @Override
     public void updateView(List<ForumSummaryBean> forumSummaryBeanList) {
-        this.forumSummaryBeanList = forumSummaryBeanList;
-        if (this.adapter != null) {
-            this.adapter.notifyDataSetChanged();
+        if (this.forumSummaryBeanList != null) {
+            this.forumSummaryBeanList.clear();
+            this.forumSummaryBeanList.addAll(forumSummaryBeanList);
+            if (this.adapter != null) {
+                this.adapter.notifyDataSetChanged();
+            }
         }
     }
 }

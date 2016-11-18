@@ -1,16 +1,18 @@
 package com.bus.tian.tianbus.model.bean;
 
+import com.bus.tian.tianbus.util.DateUtil;
+
 import java.util.Date;
 
 /**
  * Created by hsg on 2016/11/7.
  */
 
-public class ImageVideoBean {
+public class ImageVideoBean extends BaseBean {
 
     private String id;
     private String comment;
-    private Date createTime;
+    private long createTime;
     private String filePath;
     private String location;
 
@@ -30,11 +32,11 @@ public class ImageVideoBean {
         this.comment = comment;
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 
@@ -52,5 +54,27 @@ public class ImageVideoBean {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    String getKey() {
+        return getId();
+    }
+
+    @Override
+    public String toString() {
+        return "ImageVideoBean{" +
+                "id='" + id + '\'' +
+                ", comment='" + comment + '\'' +
+                ", createTime=" + createTime +
+                ", filePath='" + filePath + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
+
+    ////////////////////////////
+    // helper
+    public String getCreateTimeImpl() {
+        return DateUtil.formatDate(new Date(getCreateTime()));
     }
 }

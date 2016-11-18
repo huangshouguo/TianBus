@@ -21,7 +21,6 @@
         android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -35,7 +34,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="gGB2QlG9Xr50gAhl6LKzChfvLaspL0gn" />
@@ -62,6 +60,7 @@
         <activity android:name=".view.help.BizDetailActivity" />
         <activity android:name=".view.forum.ForumActivity" />
         <activity android:name=".view.home.CameraActivity" />
+        <activity android:name=".view.me.MeDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import com.bus.tian.tianbus.util.MultiPartUtil;
 import com.bus.tian.tianbus.util.UserManager;
 
 import java.util.Date;
+import java.util.List;
 
 import rx.Observable;
 
@@ -46,6 +47,14 @@ public class ApiExtension {
                 MultiPartUtil.string2RequestBody(String.valueOf(getNowTime())),
                 MultiPartUtil.string2RequestBody(comment),
                 MultiPartUtil.videoFileToPart(videoFile));
+    }
+
+    public static Observable<ApiResponseBean<List<ImageVideoBean>>> getPhotoRecordSummary(IApi api) {
+        return api.getPhotoRecordSummary(getUid());
+    }
+
+    public static Observable<ApiResponseBean<List<ImageVideoBean>>> getVideoRecordSummary(IApi api) {
+        return api.getVideoRecordSummary(getUid());
     }
 
     private static String getUid() {

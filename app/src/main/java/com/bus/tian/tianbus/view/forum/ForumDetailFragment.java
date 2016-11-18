@@ -84,6 +84,10 @@ public class ForumDetailFragment extends BaseFragment implements IForumDetailCon
                 .forumDetailModule(new ForumDetailModule(this))
                 .build()
                 .inject(this);
+
+        if (this.presenter != null){
+            this.presenter.loadDetailData(this.strThemeId);
+        }
     }
 
     @Override

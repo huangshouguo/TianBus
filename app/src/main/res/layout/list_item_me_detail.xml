@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!--comment-->
+    <TextView
+        android:id="@+id/text_list_item_me_detail_comment"
+        style="@style/ItemTitleStyle"
+        android:background="@color/colorBackground"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="title" />
+
+    <!--create time-->
+    <TextView
+        android:id="@+id/text_list_item_me_detail_createtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:paddingBottom="5dp"
+        android:paddingLeft="@dimen/default_left_gap"
+        android:paddingRight="@dimen/default_right_gap"
+        android:paddingTop="5dp"
+        android:text="dfsdf"
+        android:textColor="@color/colorContentText"
+        android:textSize="@dimen/ft12" />
+
+    <!--location-->
+    <TextView
+        android:id="@+id/text_list_item_me_detail_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_location"
+        android:drawablePadding="5dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingBottom="5dp"
+        android:paddingLeft="@dimen/default_left_gap"
+        android:paddingRight="@dimen/default_right_gap"
+        android:paddingTop="5dp"
+        android:text="location"
+        android:textColor="@color/colorContentText"
+        android:textSize="@dimen/ft14" />
+
+    <include layout="@layout/separator_line" />
+</LinearLayout>

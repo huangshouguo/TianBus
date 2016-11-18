@@ -19,7 +19,7 @@ public class ForumSummaryBean extends BaseBean {
     private String creator;
 
     // 创建时间
-    private Date createTime;
+    private long createTime;
 
     // 已评论数
     private String commentCount;
@@ -48,11 +48,11 @@ public class ForumSummaryBean extends BaseBean {
         this.creator = creator;
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 
@@ -84,6 +84,6 @@ public class ForumSummaryBean extends BaseBean {
     ////////////////////////////
     // helper
     public String getCreateTimeImpl() {
-        return DateUtil.formatDate(getCreateTime());
+        return DateUtil.formatDate(new Date(getCreateTime()));
     }
 }
