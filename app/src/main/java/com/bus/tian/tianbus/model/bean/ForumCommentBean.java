@@ -1,5 +1,7 @@
 package com.bus.tian.tianbus.model.bean;
 
+import android.text.TextUtils;
+
 import com.bus.tian.tianbus.util.DateUtil;
 
 import java.util.Date;
@@ -19,7 +21,7 @@ public class ForumCommentBean extends BaseBean {
     private String customer;
 
     //回复时间
-    private Date createTime;
+    private long createTime;
 
     //回复内容
     private String comment;
@@ -48,11 +50,11 @@ public class ForumCommentBean extends BaseBean {
         this.customer = customer;
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 
@@ -81,6 +83,19 @@ public class ForumCommentBean extends BaseBean {
     }
 
     public String getCreateTimeImpl(){
-        return DateUtil.formatDateTime(getCreateTime());
+        return DateUtil.formatDateTime( new Date(getCreateTime()));
+    }
+
+    public String getIdImpl(){
+        String result = TextUtils.isEmpty(getId()) ? "0": getId();
+        return String.format("%s楼", result);
+    }
+
+    public String getBizIdImpl(){
+        if (TextUtils.isEmpty(getBizId()) || "0".equals(getBizId())){
+            return "楼主";
+        } else {
+            return String.format("%s楼", getBizId());
+        }
     }
 }

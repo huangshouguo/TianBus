@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_forum_reply_item"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="10dp"
     android:paddingLeft="@dimen/default_left_gap"
-    android:paddingRight="@dimen/default_right_gap"
-    android:paddingTop="10dp">
+    android:paddingRight="@dimen/default_right_gap">
 
     <!--info-->
     <LinearLayout
+        android:paddingTop="10dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -59,7 +59,11 @@
         android:id="@+id/text_forum_reply_item_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="1222222"
         android:textColor="@color/colorTitleText"
         android:textSize="@dimen/ft14" />
+
+    <include layout="@layout/separator_line"/>
 </LinearLayout>

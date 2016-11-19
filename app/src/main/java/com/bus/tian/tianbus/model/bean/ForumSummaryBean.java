@@ -1,5 +1,7 @@
 package com.bus.tian.tianbus.model.bean;
 
+import android.text.TextUtils;
+
 import com.bus.tian.tianbus.util.DateUtil;
 
 import java.util.Date;
@@ -22,7 +24,7 @@ public class ForumSummaryBean extends BaseBean {
     private long createTime;
 
     // 已评论数
-    private String commentCount;
+    private String commnetCount;
 
     public String getThemeId() {
         return themeId;
@@ -56,12 +58,12 @@ public class ForumSummaryBean extends BaseBean {
         this.createTime = createTime;
     }
 
-    public String getCommentCount() {
-        return commentCount;
+    public String getCommnetCount() {
+        return commnetCount;
     }
 
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setCommnetCount(String commnetCount) {
+        this.commnetCount = commnetCount;
     }
 
     @Override
@@ -71,7 +73,7 @@ public class ForumSummaryBean extends BaseBean {
                 ", title='" + title + '\'' +
                 ", creator='" + creator + '\'' +
                 ", createTime=" + createTime +
-                ", commentCount='" + commentCount + '\'' +
+                ", commnetCount='" + commnetCount + '\'' +
                 '}';
     }
 
@@ -85,5 +87,14 @@ public class ForumSummaryBean extends BaseBean {
     // helper
     public String getCreateTimeImpl() {
         return DateUtil.formatDate(new Date(getCreateTime()));
+    }
+
+    public String getCommentCountImpl(){
+        String result = TextUtils.isEmpty(getCommnetCount()) ? "0" : getCommnetCount();
+        return String.format("评论(%s)", result);
+    }
+
+    public String getCreatorImpl(){
+        return String.format("楼主(%s)", getCreator());
     }
 }

@@ -5,6 +5,7 @@ package com.bus.tian.tianbus.model.event;
  */
 
 public enum  EventType {
+    EVENT_TYPE_SHOULD_LOGIN,
     EVENT_TYPE_LOGIN_SUCCESS,
     EVENT_TYPE_LOGIN_CANCEL,
     EVENT_TYPE_LOGOUT_SUCCESS,

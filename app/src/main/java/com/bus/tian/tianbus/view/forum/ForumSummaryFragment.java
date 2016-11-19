@@ -10,6 +10,7 @@ import com.bus.tian.tianbus.di.component.DaggerIForumSummaryComponent;
 import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
 import com.bus.tian.tianbus.di.module.ForumSummaryModule;
 import com.bus.tian.tianbus.model.bean.ForumSummaryBean;
+import com.bus.tian.tianbus.util.UserManager;
 import com.bus.tian.tianbus.view.BaseFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -65,12 +66,16 @@ public class ForumSummaryFragment extends BaseFragment implements IForumSummaryC
         this.forumSummaryBeanList = new ArrayList<>();
         this.recyclerView.setLayoutManager(new LinearLayoutManager(baseActivity));
         this.adapter = new ForumSummaryAdapter(R.layout.list_item_forum_summary, this.forumSummaryBeanList);
-        this.recyclerView.setAdapter(adapter);
+        this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                if ((forumActivity != null) && (i >= 0) && (forumSummaryBeanList != null) && (i < forumSummaryBeanList.size())) {
-                    forumActivity.showForumDetailFragment(forumSummaryBeanList.get(i).getThemeId());
+
+                if (UserManager.getInstance().isLogined()) {
+                    ForumSummaryBean forumSummaryBean = (ForumSummaryBean) baseQuickAdapter.getItem(i);
+                    forumActivity.showForumDetailFragment(forumSummaryBean.getThemeId());
+                } else {
+                    UserManager.getInstance().login();
                 }
             }
         });

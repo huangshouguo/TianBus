@@ -81,13 +81,8 @@ public class ForumActivity extends BaseActivity {
 
     public void showForumDetailFragment(String themeId) {
         getSupportActionBar().setTitle(R.string.text_message_board_detail);
-
-        if (this.forumDetailFragment == null) {
-            this.forumDetailFragment = ForumDetailFragment.getInstance(themeId);
-        }
-
+        this.forumDetailFragment = ForumDetailFragment.getInstance(themeId);
         this.fabForum.setVisibility(View.GONE);
-
         updateFragment(this.forumDetailFragment);
     }
 

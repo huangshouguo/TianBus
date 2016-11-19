@@ -19,10 +19,10 @@ public class ForumDetailAdapter extends BaseQuickAdapter<ForumCommentBean, BaseV
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, ForumCommentBean forumCommentBean) {
-        baseViewHolder.setText(R.id.text_forum_reply_item_id, forumCommentBean.getId());
+        baseViewHolder.setText(R.id.text_forum_reply_item_id, forumCommentBean.getIdImpl());
         baseViewHolder.setText(R.id.text_forum_reply_item_creator, forumCommentBean.getCustomer());
         baseViewHolder.setText(R.id.text_forum_reply_item_create_time, forumCommentBean.getCreateTimeImpl());
-        baseViewHolder.setText(R.id.text_forum_reply_item_bizId, forumCommentBean.getBizId());
+        baseViewHolder.setText(R.id.text_forum_reply_item_bizId, forumCommentBean.getBizIdImpl());
         baseViewHolder.setText(R.id.text_forum_reply_item_content, forumCommentBean.getComment());
     }
 }

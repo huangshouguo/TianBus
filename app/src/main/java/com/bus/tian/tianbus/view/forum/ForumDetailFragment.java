@@ -21,6 +21,7 @@ import com.bus.tian.tianbus.view.BaseFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,8 +29,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.R.attr.id;
 
 /**
  * Created by hsg on 11/5/16.
@@ -85,7 +84,7 @@ public class ForumDetailFragment extends BaseFragment implements IForumDetailCon
                 .build()
                 .inject(this);
 
-        if (this.presenter != null){
+        if (this.presenter != null) {
             this.presenter.loadDetailData(this.strThemeId);
         }
     }
@@ -93,17 +92,16 @@ public class ForumDetailFragment extends BaseFragment implements IForumDetailCon
     @Override
     protected void initView() {
         ButterKnife.bind(this, rootView);
+        this.forumCommentBeanList = new ArrayList<>();
         this.recyclerView.setLayoutManager(new LinearLayoutManager(baseActivity));
         this.adapter = new ForumDetailAdapter(R.layout.list_item_forum_reply, this.forumCommentBeanList);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void SimpleOnItemClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-                if ((i >= 0) && (forumCommentBeanList != null) && (i < forumCommentBeanList.size())) {
-                    ForumCommentBean forumCommentBean = forumCommentBeanList.get(id);
-                    strReplyId = forumCommentBean.getCustomer();
-                    editTextReply.setHint("回复：" + strReplyId);
-                }
+                ForumCommentBean forumCommentBean = (ForumCommentBean) baseQuickAdapter.getItem(i);
+                strReplyId = forumCommentBean.getId();
+                editTextReply.setHint("回复：" + strReplyId + "楼");
             }
         });
     }
@@ -120,9 +118,12 @@ public class ForumDetailFragment extends BaseFragment implements IForumDetailCon
     public void updateDetailView(ForumDetailBean forumDetailBean) {
         if (forumDetailBean != null) {
             updateTitleView(forumDetailBean.getTheme());
-            if (this.adapter != null) {
-                this.forumCommentBeanList = forumDetailBean.getComments();
-                this.adapter.notifyDataSetChanged();
+            if (this.forumCommentBeanList != null) {
+                this.forumCommentBeanList.clear();
+                this.forumCommentBeanList.addAll(forumDetailBean.getComments());
+                if (this.adapter != null) {
+                    this.adapter.notifyDataSetChanged();
+                }
             }
         }
     }
@@ -146,11 +147,13 @@ public class ForumDetailFragment extends BaseFragment implements IForumDetailCon
     private void updateTitleView(ForumSummaryBean forumSummaryBean) {
         if (forumSummaryBean != null) {
             this.textTitle.setText(forumSummaryBean.getTitle());
-            this.textlCreator.setText(forumSummaryBean.getCreator());
+            this.textlCreator.setText(forumSummaryBean.getCreatorImpl());
             this.textCreateTime.setText(forumSummaryBean.getCreateTimeImpl());
-            this.textCommentCount.setText(forumSummaryBean.getCommentCount());
-            this.editTextReply.setHint("回复：" + forumSummaryBean.getCreator());
-            this.strReplyId = forumSummaryBean.getCreator();
+            this.textCommentCount.setText(forumSummaryBean.getCommentCountImpl());
+            this.editTextReply.getText().clear();
+            this.editTextReply.clearFocus();
+            this.editTextReply.setHint("回复：楼主");
+            this.strReplyId = "0";//楼主
         }
     }
 }

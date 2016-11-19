@@ -65,6 +65,8 @@
         </LinearLayout>
     </LinearLayout>
 
+    <include layout="@layout/separator_line"/>
+
     <!--reply list-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_forum_detail"

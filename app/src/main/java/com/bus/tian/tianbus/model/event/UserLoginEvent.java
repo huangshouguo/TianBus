@@ -19,6 +19,10 @@ public class UserLoginEvent {
         this.eventType = eventType;
     }
 
+    public boolean shouldLogin(){
+        return ((this.eventType != null) && (this.eventType == EventType.EVENT_TYPE_SHOULD_LOGIN));
+    }
+
     public boolean loginSuccessEvent() {
         return ((this.eventType != null) && (this.eventType == EventType.EVENT_TYPE_LOGIN_SUCCESS));
     }

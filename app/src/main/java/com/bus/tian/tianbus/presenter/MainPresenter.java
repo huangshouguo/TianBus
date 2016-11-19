@@ -27,6 +27,9 @@ public class MainPresenter extends BasePresenter implements IMainContract.IPrese
                 .subscribe(userLoginEvent -> {
                     if (userLoginEvent != null) {
                         switch (userLoginEvent.getEventType()) {
+                            case EVENT_TYPE_SHOULD_LOGIN:
+                                shouldLogin();
+                                break;
                             case EVENT_TYPE_LOGIN_SUCCESS:
                                 onLogin();
                                 break;
@@ -47,9 +50,17 @@ public class MainPresenter extends BasePresenter implements IMainContract.IPrese
         addSubscription(subscription);
     }
 
+    private void shouldLogin() {
+        if (this.view == null) {
+            Log.e(TAG, "shouldLogin: view is null");
+            return;
+        }
+
+        this.view.startLoginActivity();
+    }
 
     private void onLogin() {
-        if (this.view == null){
+        if (this.view == null) {
             Log.e(TAG, "onLogin: view is null");
             return;
         }
@@ -58,7 +69,7 @@ public class MainPresenter extends BasePresenter implements IMainContract.IPrese
     }
 
     private void onLoginCancel() {
-        if (this.view == null){
+        if (this.view == null) {
             Log.e(TAG, "onLogin: view is null");
             return;
         }
@@ -67,7 +78,7 @@ public class MainPresenter extends BasePresenter implements IMainContract.IPrese
     }
 
     private void onTokenInvalid() {
-        if (this.view == null){
+        if (this.view == null) {
             Log.e(TAG, "onLogin: view is null");
             return;
         }
@@ -76,7 +87,7 @@ public class MainPresenter extends BasePresenter implements IMainContract.IPrese
     }
 
     private void onLogout() {
-        if (this.view == null){
+        if (this.view == null) {
             Log.e(TAG, "onLogin: view is null");
             return;
         }

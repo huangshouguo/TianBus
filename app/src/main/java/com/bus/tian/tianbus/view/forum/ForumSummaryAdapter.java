@@ -20,8 +20,8 @@ public class ForumSummaryAdapter extends BaseQuickAdapter<ForumSummaryBean, Base
     @Override
     protected void convert(BaseViewHolder baseViewHolder, ForumSummaryBean forumSummaryBean) {
         baseViewHolder.setText(R.id.text_forum_item_title, forumSummaryBean.getTitle());
-        baseViewHolder.setText(R.id.text_forum_item_creator, forumSummaryBean.getCreator());
+        baseViewHolder.setText(R.id.text_forum_item_creator, forumSummaryBean.getCreatorImpl());
         baseViewHolder.setText(R.id.text_forum_item_create_time, forumSummaryBean.getCreateTimeImpl());
-        baseViewHolder.setText(R.id.text_forum_item_comment_count, forumSummaryBean.getCommentCount());
+        baseViewHolder.setText(R.id.text_forum_item_comment_count, forumSummaryBean.getCommentCountImpl());
     }
 }

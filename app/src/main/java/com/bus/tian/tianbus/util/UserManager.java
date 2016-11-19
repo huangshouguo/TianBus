@@ -27,6 +27,10 @@ public class UserManager {
         return instance;
     }
 
+    public void login() {
+        sendShouldLoginEvent();
+    }
+
     public boolean isLogined() {
         return (getUserProfile() != null);
     }
@@ -63,6 +67,13 @@ public class UserManager {
             result = getUserOfLogined().getToken();
         }
         return result;
+    }
+
+    private void sendShouldLoginEvent() {
+        if (RxBusUtil.getDefaultInstance().hasObservers()) {
+            RxBusUtil.getDefaultInstance()
+                    .send(new UserLoginEvent(EventType.EVENT_TYPE_SHOULD_LOGIN));
+        }
     }
 
     private void sendLoginSuccessEvent() {
