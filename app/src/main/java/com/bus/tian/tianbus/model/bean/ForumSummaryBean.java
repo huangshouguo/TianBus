@@ -24,7 +24,7 @@ public class ForumSummaryBean extends BaseBean {
     private long createTime;
 
     // 已评论数
-    private String commnetCount;
+    private String commentCount;
 
     public String getThemeId() {
         return themeId;
@@ -58,12 +58,12 @@ public class ForumSummaryBean extends BaseBean {
         this.createTime = createTime;
     }
 
-    public String getCommnetCount() {
-        return commnetCount;
+    public String getCommentCount() {
+        return commentCount;
     }
 
-    public void setCommnetCount(String commnetCount) {
-        this.commnetCount = commnetCount;
+    public void setCommentCount(String commentCount) {
+        this.commentCount = commentCount;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ForumSummaryBean extends BaseBean {
                 ", title='" + title + '\'' +
                 ", creator='" + creator + '\'' +
                 ", createTime=" + createTime +
-                ", commnetCount='" + commnetCount + '\'' +
+                ", commentCount='" + commentCount + '\'' +
                 '}';
     }
 
@@ -90,7 +90,7 @@ public class ForumSummaryBean extends BaseBean {
     }
 
     public String getCommentCountImpl(){
-        String result = TextUtils.isEmpty(getCommnetCount()) ? "0" : getCommnetCount();
+        String result = TextUtils.isEmpty(getCommentCount()) ? "0" : getCommentCount();
         return String.format("评论(%s)", result);
     }
 

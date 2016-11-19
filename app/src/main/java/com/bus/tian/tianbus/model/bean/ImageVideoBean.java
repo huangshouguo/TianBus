@@ -75,6 +75,6 @@ public class ImageVideoBean extends BaseBean {
     ////////////////////////////
     // helper
     public String getCreateTimeImpl() {
-        return DateUtil.formatDate(new Date(getCreateTime()));
+        return "上传时间："+DateUtil.formatDateTime(new Date(getCreateTime()));
     }
 }

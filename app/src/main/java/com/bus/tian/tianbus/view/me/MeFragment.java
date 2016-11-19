@@ -14,6 +14,7 @@ import com.bus.tian.tianbus.contract.IMeContract;
 import com.bus.tian.tianbus.di.component.DaggerIMeComponent;
 import com.bus.tian.tianbus.di.component.DaggerINetCompoent;
 import com.bus.tian.tianbus.di.module.MeModule;
+import com.bus.tian.tianbus.model.bean.ImageTextBean;
 import com.bus.tian.tianbus.util.UserManager;
 import com.bus.tian.tianbus.view.BaseFragment;
 import com.bus.tian.tianbus.view.MainActivity;
@@ -40,7 +41,7 @@ public class MeFragment extends BaseFragment implements IMeContract.IView {
 
     private MainActivity mainActivity;
     private MeAdapter adapter;
-    private List<String> dataList;
+    private List<ImageTextBean> dataList;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -97,7 +98,7 @@ public class MeFragment extends BaseFragment implements IMeContract.IView {
     }
 
     @Override
-    public void updateView(List<String> data) {
+    public void updateView(List<ImageTextBean> data) {
         if (this.dataList != null) {
             this.dataList.clear();
             this.dataList.addAll(data);

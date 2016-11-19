@@ -95,7 +95,7 @@ public class MeDetailActivity extends BaseActivity implements IMeDetailContract.
     private void initToolbar() {
         setSupportActionBar(this.toolBarMeDetail);
         ActionBar actionBar = getSupportActionBar();
-        String title = SOURCE_IMAGE_TAG.equals(this.strSourceTag) ? "上传警情图片记录" : "上传警情视频记录";
+        String title = SOURCE_IMAGE_TAG.equals(this.strSourceTag) ? "警情图片记录" : "警情视频记录";
         actionBar.setTitle(title);
     }
 

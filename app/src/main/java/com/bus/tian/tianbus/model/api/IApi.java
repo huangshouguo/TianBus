@@ -1,6 +1,7 @@
 package com.bus.tian.tianbus.model.api;
 
 import com.bus.tian.tianbus.model.bean.ApiResponseBean;
+import com.bus.tian.tianbus.model.bean.CopAnnouncementBean;
 import com.bus.tian.tianbus.model.bean.ForumCommentBean;
 import com.bus.tian.tianbus.model.bean.ForumDetailBean;
 import com.bus.tian.tianbus.model.bean.ForumSummaryBean;
@@ -73,6 +74,11 @@ public interface IApi {
             @Field("uid") String uid);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    // 警务公告相关Api
+    @GET("announcement")
+    Observable<ApiResponseBean<List<CopAnnouncementBean>>> getCopAnnouncementList();
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     // 警情相关Api
     @Multipart
     @POST("image")
@@ -125,4 +131,5 @@ public interface IApi {
             @Field("uid") String uid,
             @Field("title") String title,
             @Field("createTime") long createTime);
+
 }

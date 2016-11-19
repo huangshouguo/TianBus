@@ -17,7 +17,6 @@ public class MultiPartUtil {
     public static MultipartBody.Part imageFileToPart(final String filePathName) {
 
         File file = FileUtil.getFileFromBitmap(filePathName, FileUtil.getBitmapByFilePathName(filePathName));
-
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
         return part;

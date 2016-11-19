@@ -1,5 +1,7 @@
 package com.bus.tian.tianbus.contract;
 
+import com.bus.tian.tianbus.model.bean.ImageTextBean;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,7 @@ import java.util.List;
 
 public interface IMeContract {
     interface IView extends IBaseContract.IBaseView {
-        void updateView(List<String> data);
+        void updateView(List<ImageTextBean> data);
     }
 
     interface IPresenter extends IBaseContract.IBasePresenter {

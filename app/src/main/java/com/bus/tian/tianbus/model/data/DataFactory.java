@@ -1,6 +1,8 @@
 package com.bus.tian.tianbus.model.data;
 
+import com.bus.tian.tianbus.R;
 import com.bus.tian.tianbus.model.bean.HelpBizBean;
+import com.bus.tian.tianbus.model.bean.ImageTextBean;
 import com.bus.tian.tianbus.model.bean.TextLinkBean;
 import com.bus.tian.tianbus.model.bean.TitleContentBean;
 
@@ -199,10 +201,20 @@ public class DataFactory {
         return list;
     }
 
-    public static List<String> getMeItemDataList() {
-        List<String> dataList = new ArrayList<>();
-        dataList.add("上传警情图片记录");
-        dataList.add("上传警情视频记录");
+    public static List<ImageTextBean> getMeItemDataList() {
+        List<ImageTextBean> dataList = new ArrayList<>();
+
+        ImageTextBean itemImage = new ImageTextBean();
+        itemImage.setImageResId(R.drawable.ic_photo);
+        itemImage.setText("警情图片记录");
+
+        dataList.add(itemImage);
+
+        ImageTextBean itemVideo = new ImageTextBean();
+        itemVideo.setImageResId(R.drawable.ic_video);
+        itemVideo.setText("警情视频记录");
+        dataList.add(itemVideo);
+
         return dataList;
     }
 }

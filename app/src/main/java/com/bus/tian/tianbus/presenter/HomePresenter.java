@@ -4,10 +4,13 @@ import android.util.Log;
 
 import com.bus.tian.tianbus.contract.IHomeContract;
 import com.bus.tian.tianbus.model.bean.CopAnnouncementBean;
+import com.bus.tian.tianbus.util.ApiRspSubscriber;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import rx.Subscription;
 
 /**
  * Created by hsg on 2016/10/30.
@@ -29,7 +32,22 @@ public class HomePresenter extends BasePresenter implements IHomeContract.IPrese
             return;
         }
 
-        this.view.updateCopAnnouncementListView(generator());
+        Subscription subscription = getApi().getCopAnnouncementList()
+                .compose(preHandleApiResponse())
+                .compose(doSchedulersAndBindLifecycle())
+                .subscribe(new ApiRspSubscriber<List<CopAnnouncementBean>>(this.view){
+                    @Override
+                    public void onNext(List<CopAnnouncementBean> copAnnouncementBeanList) {
+                        super.onNext(copAnnouncementBeanList);
+                        if (view != null){
+                            view.updateCopAnnouncementListView(copAnnouncementBeanList);
+                        }
+                    }
+                });
+
+        addSubscription(subscription);
+
+//        this.view.updateCopAnnouncementListView(generator());
     }
 
     private List<CopAnnouncementBean> generator(){
