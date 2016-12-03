@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/default_left_gap">
 
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="便民警务APP是一款便民警务平台，立志于为百姓提供实际边界服务，为百姓提供查询公安办事流程和法律信息的服务，以及上传实时发现违法情况和与社区民警在线沟通的服务。"
+        android:textColor="@color/colorContentText"
+        android:textSize="@dimen/ft14"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:paddingBottom="80dp"
+        android:text="便民警务 V1.0"
+        android:textColor="@color/colorInputHintText"
+        android:textSize="@dimen/ft14"/>
+</RelativeLayout>
